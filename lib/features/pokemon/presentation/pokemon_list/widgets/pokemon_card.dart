@@ -20,7 +20,7 @@ class PokemonCard extends StatelessWidget {
       onTap: () =>
           context.pushNamed(AppRoute.pokemonDetails.name, extra: pokemon),
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 2.0),
+        padding: const EdgeInsets.only(bottom: 5.0),
         child: Container(
           color: Colors.white,
           padding: const EdgeInsets.all(10),
@@ -30,31 +30,29 @@ class PokemonCard extends StatelessWidget {
               SizedBox(
                 height: 60,
                 width: 60,
-                child: Expanded(
-                  child: CachedNetworkImage(
-                    placeholder: (context, url) {
-                      return const Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 10.0,
-                          horizontal: 20,
-                        ),
-                        child: CircularProgressIndicator(
-                          strokeWidth: 1,
-                        ),
-                      );
-                    },
-                    imageBuilder: (context, imageProvider) => Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
-                        ),
+                child: CachedNetworkImage(
+                  placeholder: (context, url) {
+                    return const Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 10.0,
+                        horizontal: 20,
+                      ),
+                      child: CircularProgressIndicator(
+                        strokeWidth: 1,
+                      ),
+                    );
+                  },
+                  imageBuilder: (context, imageProvider) => Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: imageProvider,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    imageUrl: pokemon
-                            ?.sprites?.image?.pokemonImageHome?.frontDefault ??
-                        '',
                   ),
+                  imageUrl:
+                      pokemon?.sprites?.image?.pokemonImageHome?.frontDefault ??
+                          '',
                 ),
               ),
               const SizedBox(

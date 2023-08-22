@@ -28,7 +28,6 @@ class HomeContent extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Pokemon List'),
         centerTitle: true,
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: const PokemonList(),
     );

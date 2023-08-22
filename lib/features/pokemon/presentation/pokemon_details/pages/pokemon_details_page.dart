@@ -19,8 +19,15 @@ class PokemonDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(pokemon?.name ?? ''),
+        centerTitle: true,
+        title: const Text('Detail'),
+        leading: IconButton(
+          splashRadius: 20,
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+          ),
+        ),
       ),
       body: BlocProvider(
         create: (context) => PokemonDetailsCubit(
