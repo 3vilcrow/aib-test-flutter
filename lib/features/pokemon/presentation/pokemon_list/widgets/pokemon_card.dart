@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:aib_test/core/routing/app_router.dart';
+import 'package:aib_test/core/utils/string_extension.dart';
 import 'package:aib_test/features/pokemon/domain/model/pokemon/pokemon.dart';
 import 'package:go_router/go_router.dart';
 
@@ -23,7 +24,7 @@ class PokemonCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
                 height: 40,
@@ -50,7 +51,13 @@ class PokemonCard extends StatelessWidget {
                           '',
                 ),
               ),
-              Text(pokemon?.name ?? 'N/A'),
+              const SizedBox(
+                width: 10,
+              ),
+              Text(
+                pokemon?.name?.capitalize() ?? 'N/A',
+                style: const TextStyle(fontSize: 16),
+              ),
             ],
           ),
         ),
