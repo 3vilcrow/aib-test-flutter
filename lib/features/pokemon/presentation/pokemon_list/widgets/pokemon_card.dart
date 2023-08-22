@@ -18,9 +18,10 @@ class PokemonCard extends StatelessWidget {
     return GestureDetector(
       onTap: () =>
           context.pushNamed(AppRoute.pokemonDetails.name, extra: pokemon),
-      child: Card(
-        elevation: 4,
-        child: Padding(
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 2.0),
+        child: Container(
+          color: Colors.white,
           padding: const EdgeInsets.all(10),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -31,7 +32,8 @@ class PokemonCard extends StatelessWidget {
                 child: CachedNetworkImage(
                   placeholder: (context, url) {
                     return const Padding(
-                      padding: EdgeInsets.all(10.0),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
                       child: CircularProgressIndicator(
                         strokeWidth: 1,
                       ),
@@ -57,6 +59,8 @@ class PokemonCard extends StatelessWidget {
                 pokemon?.name?.capitalize() ?? 'N/A',
                 style: const TextStyle(fontSize: 16),
               ),
+              const Spacer(),
+              const Icon(Icons.arrow_forward_ios_rounded)
             ],
           ),
         ),
