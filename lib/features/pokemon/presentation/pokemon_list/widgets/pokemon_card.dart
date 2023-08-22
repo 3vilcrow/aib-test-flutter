@@ -1,10 +1,13 @@
+import 'package:aib_test/core/utils/string_extension.dart';
+import 'package:aib_test/features/pokemon/presentation/pokemon_details/pages/arguments/pokemon_details_page_args.dart';
 import 'package:aib_test/features/pokemon/presentation/pokemon_list/widgets/pokemon_type_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:aib_test/core/routing/app_router.dart';
-import 'package:aib_test/core/utils/string_extension.dart';
+
 import 'package:aib_test/features/pokemon/domain/model/pokemon/pokemon.dart';
-import 'package:go_router/go_router.dart';
+
+import 'package:get/route_manager.dart';
 
 class PokemonCard extends StatelessWidget {
   const PokemonCard({
@@ -17,8 +20,10 @@ class PokemonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () =>
-          context.pushNamed(AppRoute.pokemonDetails.name, extra: pokemon),
+      onTap: () => Get.toNamed(
+        AppRoute.pokemonDetails.name,
+        arguments: PokemonDetailsPageArgs(pokemon: pokemon),
+      ),
       child: Padding(
         padding: const EdgeInsets.only(bottom: 5.0),
         child: Container(

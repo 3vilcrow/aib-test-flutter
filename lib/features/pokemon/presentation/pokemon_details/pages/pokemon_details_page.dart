@@ -1,22 +1,23 @@
 import 'package:aib_test/core/utils/enums/status.dart';
+import 'package:aib_test/features/pokemon/presentation/pokemon_details/pages/arguments/pokemon_details_page_args.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:aib_test/core/di/service_locator.dart';
 import 'package:aib_test/features/pokemon/domain/model/pokemon/pokemon.dart';
-import 'package:aib_test/features/pokemon/domain/repository/pokemons_repository.dart';
 import 'package:aib_test/features/pokemon/presentation/pokemon_details/cubit/pokemon_details_cubit.dart';
 import 'package:aib_test/features/pokemon/presentation/pokemon_details/cubit/pokemon_details_state.dart';
+import 'package:get/get.dart';
 
 class PokemonDetails extends StatelessWidget {
   const PokemonDetails({
     super.key,
-    this.pokemon,
   });
-
-  final Pokemon? pokemon;
 
   @override
   Widget build(BuildContext context) {
+    final arg = Get.arguments is PokemonDetailsPageArgs
+        ? Get.arguments as PokemonDetailsPageArgs
+        : null;
+    final Pokemon? pokemon = arg?.pokemon;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -31,8 +32,8 @@ class PokemonDetails extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (context) => PokemonDetailsCubit(
-          pokemonsRepository: locator<PokemonsRepository>(),
-        )..getPokemon(pokemon?.url ?? ''),
+          pokemon: pokemon,
+        )..initiaize(),
         child: const PokemonDetailsContent(),
       ),
     );

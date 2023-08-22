@@ -1,28 +1,24 @@
 import 'package:aib_test/features/home/presentation/pages/home_page.dart';
-import 'package:aib_test/features/pokemon/domain/model/pokemon/pokemon.dart';
 import 'package:aib_test/features/pokemon/presentation/pokemon_details/pages/pokemon_details_page.dart';
-import 'package:go_router/go_router.dart';
+import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:get/get_navigation/src/routes/transitions_type.dart';
 
 enum AppRoute {
   home,
   pokemonDetails,
 }
 
-final GoRouter goRouter = GoRouter(
-  routes: [
-    GoRoute(
-      path: '/',
-      name: AppRoute.home.name,
-      builder: (context, state) => const HomePage(),
-      routes: [
-        GoRoute(
-          path: AppRoute.pokemonDetails.name,
-          name: AppRoute.pokemonDetails.name,
-          builder: (context, state) => PokemonDetails(
-            pokemon: state.extra as Pokemon,
-          ),
-        )
-      ],
+class RoutesHandler {
+  static final appPages = [
+    GetPage(
+      name: '/${AppRoute.home.name}',
+      transition: Transition.fadeIn,
+      page: () => const HomePage(),
     ),
-  ],
-);
+    GetPage(
+      name: '/${AppRoute.pokemonDetails.name}',
+      transition: Transition.fadeIn,
+      page: () => const PokemonDetails(),
+    ),
+  ];
+}
