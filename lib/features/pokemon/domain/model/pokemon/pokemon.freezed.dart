@@ -28,8 +28,7 @@ mixin _$Pokemon {
   @JsonKey(name: 'is_default')
   bool? get isDefault => throw _privateConstructorUsedError;
   int? get order => throw _privateConstructorUsedError;
-  int? get weight => throw _privateConstructorUsedError;
-  PokemonTypes? get types => throw _privateConstructorUsedError;
+  int? get weight => throw _privateConstructorUsedError; // PokemonTypes? types,
   Sprites? get sprites => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
 
@@ -51,11 +50,9 @@ abstract class $PokemonCopyWith<$Res> {
       @JsonKey(name: 'is_default') bool? isDefault,
       int? order,
       int? weight,
-      PokemonTypes? types,
       Sprites? sprites,
       String? url});
 
-  $PokemonTypesCopyWith<$Res>? get types;
   $SpritesCopyWith<$Res>? get sprites;
 }
 
@@ -79,7 +76,6 @@ class _$PokemonCopyWithImpl<$Res, $Val extends Pokemon>
     Object? isDefault = freezed,
     Object? order = freezed,
     Object? weight = freezed,
-    Object? types = freezed,
     Object? sprites = freezed,
     Object? url = freezed,
   }) {
@@ -112,10 +108,6 @@ class _$PokemonCopyWithImpl<$Res, $Val extends Pokemon>
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
               as int?,
-      types: freezed == types
-          ? _value.types
-          : types // ignore: cast_nullable_to_non_nullable
-              as PokemonTypes?,
       sprites: freezed == sprites
           ? _value.sprites
           : sprites // ignore: cast_nullable_to_non_nullable
@@ -125,18 +117,6 @@ class _$PokemonCopyWithImpl<$Res, $Val extends Pokemon>
           : url // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PokemonTypesCopyWith<$Res>? get types {
-    if (_value.types == null) {
-      return null;
-    }
-
-    return $PokemonTypesCopyWith<$Res>(_value.types!, (value) {
-      return _then(_value.copyWith(types: value) as $Val);
-    });
   }
 
   @override
@@ -167,12 +147,9 @@ abstract class _$$_PokemonCopyWith<$Res> implements $PokemonCopyWith<$Res> {
       @JsonKey(name: 'is_default') bool? isDefault,
       int? order,
       int? weight,
-      PokemonTypes? types,
       Sprites? sprites,
       String? url});
 
-  @override
-  $PokemonTypesCopyWith<$Res>? get types;
   @override
   $SpritesCopyWith<$Res>? get sprites;
 }
@@ -194,7 +171,6 @@ class __$$_PokemonCopyWithImpl<$Res>
     Object? isDefault = freezed,
     Object? order = freezed,
     Object? weight = freezed,
-    Object? types = freezed,
     Object? sprites = freezed,
     Object? url = freezed,
   }) {
@@ -227,10 +203,6 @@ class __$$_PokemonCopyWithImpl<$Res>
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
               as int?,
-      types: freezed == types
-          ? _value.types
-          : types // ignore: cast_nullable_to_non_nullable
-              as PokemonTypes?,
       sprites: freezed == sprites
           ? _value.sprites
           : sprites // ignore: cast_nullable_to_non_nullable
@@ -254,7 +226,6 @@ class _$_Pokemon implements _Pokemon {
       @JsonKey(name: 'is_default') this.isDefault,
       this.order,
       this.weight,
-      this.types,
       this.sprites,
       this.url});
 
@@ -277,8 +248,7 @@ class _$_Pokemon implements _Pokemon {
   final int? order;
   @override
   final int? weight;
-  @override
-  final PokemonTypes? types;
+// PokemonTypes? types,
   @override
   final Sprites? sprites;
   @override
@@ -286,7 +256,7 @@ class _$_Pokemon implements _Pokemon {
 
   @override
   String toString() {
-    return 'Pokemon(id: $id, name: $name, baseExperience: $baseExperience, height: $height, isDefault: $isDefault, order: $order, weight: $weight, types: $types, sprites: $sprites, url: $url)';
+    return 'Pokemon(id: $id, name: $name, baseExperience: $baseExperience, height: $height, isDefault: $isDefault, order: $order, weight: $weight, sprites: $sprites, url: $url)';
   }
 
   @override
@@ -303,7 +273,6 @@ class _$_Pokemon implements _Pokemon {
                 other.isDefault == isDefault) &&
             (identical(other.order, order) || other.order == order) &&
             (identical(other.weight, weight) || other.weight == weight) &&
-            (identical(other.types, types) || other.types == types) &&
             (identical(other.sprites, sprites) || other.sprites == sprites) &&
             (identical(other.url, url) || other.url == url));
   }
@@ -311,7 +280,7 @@ class _$_Pokemon implements _Pokemon {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, baseExperience, height,
-      isDefault, order, weight, types, sprites, url);
+      isDefault, order, weight, sprites, url);
 
   @JsonKey(ignore: true)
   @override
@@ -336,7 +305,6 @@ abstract class _Pokemon implements Pokemon {
       @JsonKey(name: 'is_default') final bool? isDefault,
       final int? order,
       final int? weight,
-      final PokemonTypes? types,
       final Sprites? sprites,
       final String? url}) = _$_Pokemon;
 
@@ -358,9 +326,7 @@ abstract class _Pokemon implements Pokemon {
   int? get order;
   @override
   int? get weight;
-  @override
-  PokemonTypes? get types;
-  @override
+  @override // PokemonTypes? types,
   Sprites? get sprites;
   @override
   String? get url;

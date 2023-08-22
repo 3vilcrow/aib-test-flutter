@@ -1,3 +1,5 @@
+import 'package:aib_test/features/pokemon/data/dto/get_pokemon/get_pokemon.dart';
+import 'package:aib_test/features/pokemon/domain/model/pokemon/pokemon.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aib_test/core/utils/constants/app_contants.dart';
 import 'package:aib_test/core/utils/enums/status.dart';
@@ -28,20 +30,57 @@ class PokemonListCubit extends Cubit<PokemonListState> {
         offset: AppConstants.defaultPage,
         limit: AppConstants.defaultSize,
       );
-      final either = await _pokemonsRepository.getPokemonsList(pokemonsRequest);
-      return either.fold(
-        (failure) {
-          emit(
+      final eitherListPokemon =
+          await _pokemonsRepository.getPokemonsList(pokemonsRequest);
+      eitherListPokemon.fold(
+        (failureGetListPokemon) {
+          return emit(
             state.copyWith(
               status: Status.error,
             ),
           );
         },
-        (response) {
-          emit(
+        (responseListPokemon) async {
+          for (var pokemon in responseListPokemon) {
+            if (pokemon.url == null) {
+              return emit(
+                state.copyWith(
+                  status: Status.error,
+                ),
+              );
+            } else {
+              GetPokemonRequestDTO pokemonRequest = GetPokemonRequestDTO(
+                url: pokemon.url!,
+              );
+              final eitherPokemon =
+                  await _pokemonsRepository.getPokemon(pokemonRequest);
+
+              eitherPokemon.fold((failureGetPokemon) {
+                return emit(
+                  state.copyWith(
+                    status: Status.error,
+                  ),
+                );
+              }, (pokemon) async {
+                if (pokemon == null) {
+                  emit(
+                    state.copyWith(
+                      status: Status.error,
+                    ),
+                  );
+                } else {
+                  final indexPokemonInList = responseListPokemon
+                      .indexWhere((p) => p.name == pokemon.name);
+                  responseListPokemon.removeAt(indexPokemonInList);
+                  responseListPokemon.insert(indexPokemonInList, pokemon);
+                }
+              });
+            }
+          }
+          return emit(
             state.copyWith(
               status: Status.success,
-              pokemonList: response,
+              pokemonList: responseListPokemon,
               hasReachedMax: false,
             ),
           );
@@ -53,24 +92,64 @@ class PokemonListCubit extends Cubit<PokemonListState> {
       limit: AppConstants.defaultSize,
     );
     final either = await _pokemonsRepository.getPokemonsList(pokemonsRequest);
-    return either.fold(
+    either.fold(
       (failure) {
-        emit(
+        return emit(
           state.copyWith(
             status: Status.error,
           ),
         );
       },
-      (response) {
-        response.isEmpty
-            ? emit(state.copyWith(hasReachedMax: true))
-            : emit(
+      (response) async {
+        List<Pokemon> listPokemon = List.from(response);
+        if (listPokemon.isEmpty) {
+          emit(state.copyWith(hasReachedMax: true));
+        } else {
+          for (var pokemon in listPokemon) {
+            if (pokemon.url == null) {
+              return emit(
                 state.copyWith(
-                  status: Status.success,
-                  pokemonList: List.of(state.pokemonList)..addAll(response),
-                  hasReachedMax: false,
+                  status: Status.error,
                 ),
               );
+            } else {
+              GetPokemonRequestDTO pokemonRequest = GetPokemonRequestDTO(
+                url: pokemon.url!,
+              );
+              final eitherPokemon =
+                  await _pokemonsRepository.getPokemon(pokemonRequest);
+
+              eitherPokemon.fold((failureGetPokemon) {
+                return emit(
+                  state.copyWith(
+                    status: Status.error,
+                  ),
+                );
+              }, (pokemon) async {
+                if (pokemon == null) {
+                  return emit(
+                    state.copyWith(
+                      status: Status.error,
+                    ),
+                  );
+                } else {
+                  final indexPokemonInList =
+                      listPokemon.indexWhere((p) => p.name == pokemon.name);
+                  listPokemon.removeAt(indexPokemonInList);
+                  listPokemon.insert(indexPokemonInList, pokemon);
+                }
+              });
+            }
+          }
+
+          return emit(
+            state.copyWith(
+              status: Status.success,
+              pokemonList: List.of(state.pokemonList)..addAll(listPokemon),
+              hasReachedMax: false,
+            ),
+          );
+        }
       },
     );
   }
