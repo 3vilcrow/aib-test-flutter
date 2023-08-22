@@ -20,7 +20,6 @@ class PokemonCard extends StatelessWidget {
           context.pushNamed(AppRoute.pokemonDetails.name, extra: pokemon),
       child: Card(
         elevation: 4,
-        margin: const EdgeInsets.all(16),
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Row(

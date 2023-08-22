@@ -19,7 +19,13 @@ class MyApp extends StatelessWidget {
       routerDelegate: goRouter.routerDelegate,
       routeInformationProvider: goRouter.routeInformationProvider,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        scaffoldBackgroundColor: const Color.fromRGBO(235, 240, 252, 1),
+        appBarTheme: const AppBarTheme(color: Color.fromRGBO(216, 224, 243, 1)),
+        colorScheme: const ColorScheme.light(
+          background: Color.fromRGBO(235, 240, 252, 1),
+          primary: Color.fromRGBO(235, 240, 252, 1),
+          error: Color.fromARGB(255, 220, 3, 3),
+        ),
         useMaterial3: true,
       ),
     );
