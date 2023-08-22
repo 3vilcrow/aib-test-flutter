@@ -15,5 +15,5 @@ _$_PokemonImage _$$_PokemonImageFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_PokemonImageToJson(_$_PokemonImage instance) =>
     <String, dynamic>{
-      'home': instance.pokemonImageHome,
+      'home': instance.pokemonImageHome?.toJson(),
     };

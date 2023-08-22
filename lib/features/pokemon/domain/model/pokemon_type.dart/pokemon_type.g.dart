@@ -15,5 +15,5 @@ _$_PokemonType _$$_PokemonTypeFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_PokemonTypeToJson(_$_PokemonType instance) =>
     <String, dynamic>{
-      'type': instance.type,
+      'type': instance.type?.toJson(),
     };

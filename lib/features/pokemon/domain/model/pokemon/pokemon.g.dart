@@ -14,8 +14,11 @@ _$_Pokemon _$$_PokemonFromJson(Map<String, dynamic> json) => _$_Pokemon(
       isDefault: json['is_default'] as bool?,
       order: json['order'] as int?,
       weight: json['weight'] as int?,
-      types:
-          json['types'] == null ? null : PokemonTypes.fromJson(json['types']),
+      types: (json['types'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : PokemonType.fromJson(e as Map<String, dynamic>))
+          .toList(),
       sprites: json['sprites'] == null
           ? null
           : Sprites.fromJson(json['sprites'] as Map<String, dynamic>),
@@ -31,7 +34,7 @@ Map<String, dynamic> _$$_PokemonToJson(_$_Pokemon instance) =>
       'is_default': instance.isDefault,
       'order': instance.order,
       'weight': instance.weight,
-      'types': instance.types,
-      'sprites': instance.sprites,
+      'types': instance.types?.map((e) => e?.toJson()).toList(),
+      'sprites': instance.sprites?.toJson(),
       'url': instance.url,
     };

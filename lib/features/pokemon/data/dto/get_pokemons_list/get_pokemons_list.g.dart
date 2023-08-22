@@ -31,5 +31,5 @@ _$_GetPokemonsListResponseDTO _$$_GetPokemonsListResponseDTOFromJson(
 Map<String, dynamic> _$$_GetPokemonsListResponseDTOToJson(
         _$_GetPokemonsListResponseDTO instance) =>
     <String, dynamic>{
-      'results': instance.results,
+      'results': instance.results?.map((e) => e.toJson()).toList(),
     };

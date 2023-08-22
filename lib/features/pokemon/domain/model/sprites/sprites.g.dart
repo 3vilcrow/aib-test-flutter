@@ -22,5 +22,5 @@ Map<String, dynamic> _$$_SpritesToJson(_$_Sprites instance) =>
       'back_shiny': instance.backShiny,
       'front_default': instance.frontDefault,
       'front_shiny': instance.frontShiny,
-      'other': instance.image,
+      'other': instance.image?.toJson(),
     };

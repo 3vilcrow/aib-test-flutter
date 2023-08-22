@@ -84,11 +84,10 @@ class PokemonCard extends StatelessWidget {
                     child: ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
-                      itemCount: pokemon?.types?.types?.length,
+                      itemCount: pokemon?.types?.length,
                       itemBuilder: (BuildContext context, int index) {
                         return PokemonTypeWidget(
-                          type:
-                              pokemon?.types?.types?[index].type?.name ?? 'N/A',
+                          type: pokemon?.types?[index]?.type?.name ?? 'N/A',
                         );
                       },
                     ),
