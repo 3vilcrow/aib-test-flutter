@@ -28,6 +28,8 @@ mixin _$Sprites {
   String? get frontDefault => throw _privateConstructorUsedError;
   @JsonKey(name: 'front_shiny')
   String? get frontShiny => throw _privateConstructorUsedError;
+  @JsonKey(name: 'other')
+  PokemonImage? get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +45,10 @@ abstract class $SpritesCopyWith<$Res> {
       {@JsonKey(name: 'back_default') String? backDefault,
       @JsonKey(name: 'back_shiny') String? backShiny,
       @JsonKey(name: 'front_default') String? frontDefault,
-      @JsonKey(name: 'front_shiny') String? frontShiny});
+      @JsonKey(name: 'front_shiny') String? frontShiny,
+      @JsonKey(name: 'other') PokemonImage? image});
+
+  $PokemonImageCopyWith<$Res>? get image;
 }
 
 /// @nodoc
@@ -63,6 +68,7 @@ class _$SpritesCopyWithImpl<$Res, $Val extends Sprites>
     Object? backShiny = freezed,
     Object? frontDefault = freezed,
     Object? frontShiny = freezed,
+    Object? image = freezed,
   }) {
     return _then(_value.copyWith(
       backDefault: freezed == backDefault
@@ -81,7 +87,23 @@ class _$SpritesCopyWithImpl<$Res, $Val extends Sprites>
           ? _value.frontShiny
           : frontShiny // ignore: cast_nullable_to_non_nullable
               as String?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as PokemonImage?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PokemonImageCopyWith<$Res>? get image {
+    if (_value.image == null) {
+      return null;
+    }
+
+    return $PokemonImageCopyWith<$Res>(_value.image!, (value) {
+      return _then(_value.copyWith(image: value) as $Val);
+    });
   }
 }
 
@@ -96,7 +118,11 @@ abstract class _$$_SpritesCopyWith<$Res> implements $SpritesCopyWith<$Res> {
       {@JsonKey(name: 'back_default') String? backDefault,
       @JsonKey(name: 'back_shiny') String? backShiny,
       @JsonKey(name: 'front_default') String? frontDefault,
-      @JsonKey(name: 'front_shiny') String? frontShiny});
+      @JsonKey(name: 'front_shiny') String? frontShiny,
+      @JsonKey(name: 'other') PokemonImage? image});
+
+  @override
+  $PokemonImageCopyWith<$Res>? get image;
 }
 
 /// @nodoc
@@ -113,6 +139,7 @@ class __$$_SpritesCopyWithImpl<$Res>
     Object? backShiny = freezed,
     Object? frontDefault = freezed,
     Object? frontShiny = freezed,
+    Object? image = freezed,
   }) {
     return _then(_$_Sprites(
       backDefault: freezed == backDefault
@@ -131,6 +158,10 @@ class __$$_SpritesCopyWithImpl<$Res>
           ? _value.frontShiny
           : frontShiny // ignore: cast_nullable_to_non_nullable
               as String?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as PokemonImage?,
     ));
   }
 }
@@ -142,7 +173,8 @@ class _$_Sprites implements _Sprites {
       {@JsonKey(name: 'back_default') this.backDefault,
       @JsonKey(name: 'back_shiny') this.backShiny,
       @JsonKey(name: 'front_default') this.frontDefault,
-      @JsonKey(name: 'front_shiny') this.frontShiny});
+      @JsonKey(name: 'front_shiny') this.frontShiny,
+      @JsonKey(name: 'other') this.image});
 
   factory _$_Sprites.fromJson(Map<String, dynamic> json) =>
       _$$_SpritesFromJson(json);
@@ -159,10 +191,13 @@ class _$_Sprites implements _Sprites {
   @override
   @JsonKey(name: 'front_shiny')
   final String? frontShiny;
+  @override
+  @JsonKey(name: 'other')
+  final PokemonImage? image;
 
   @override
   String toString() {
-    return 'Sprites(backDefault: $backDefault, backShiny: $backShiny, frontDefault: $frontDefault, frontShiny: $frontShiny)';
+    return 'Sprites(backDefault: $backDefault, backShiny: $backShiny, frontDefault: $frontDefault, frontShiny: $frontShiny, image: $image)';
   }
 
   @override
@@ -177,13 +212,14 @@ class _$_Sprites implements _Sprites {
             (identical(other.frontDefault, frontDefault) ||
                 other.frontDefault == frontDefault) &&
             (identical(other.frontShiny, frontShiny) ||
-                other.frontShiny == frontShiny));
+                other.frontShiny == frontShiny) &&
+            (identical(other.image, image) || other.image == image));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, backDefault, backShiny, frontDefault, frontShiny);
+      runtimeType, backDefault, backShiny, frontDefault, frontShiny, image);
 
   @JsonKey(ignore: true)
   @override
@@ -204,7 +240,8 @@ abstract class _Sprites implements Sprites {
       {@JsonKey(name: 'back_default') final String? backDefault,
       @JsonKey(name: 'back_shiny') final String? backShiny,
       @JsonKey(name: 'front_default') final String? frontDefault,
-      @JsonKey(name: 'front_shiny') final String? frontShiny}) = _$_Sprites;
+      @JsonKey(name: 'front_shiny') final String? frontShiny,
+      @JsonKey(name: 'other') final PokemonImage? image}) = _$_Sprites;
 
   factory _Sprites.fromJson(Map<String, dynamic> json) = _$_Sprites.fromJson;
 
@@ -220,6 +257,9 @@ abstract class _Sprites implements Sprites {
   @override
   @JsonKey(name: 'front_shiny')
   String? get frontShiny;
+  @override
+  @JsonKey(name: 'other')
+  PokemonImage? get image;
   @override
   @JsonKey(ignore: true)
   _$$_SpritesCopyWith<_$_Sprites> get copyWith =>
