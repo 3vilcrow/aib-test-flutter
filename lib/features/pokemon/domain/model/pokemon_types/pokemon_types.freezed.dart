@@ -14,13 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-PokemonTypes _$PokemonTypesFromJson(Map<String, dynamic> json) {
+PokemonTypes _$PokemonTypesFromJson(List<dynamic> json) {
   return _PokemonTypes.fromJson(json);
 }
 
 /// @nodoc
 mixin _$PokemonTypes {
-  List<String>? get types => throw _privateConstructorUsedError;
+  List<PokemonType>? get types => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +34,7 @@ abstract class $PokemonTypesCopyWith<$Res> {
           PokemonTypes value, $Res Function(PokemonTypes) then) =
       _$PokemonTypesCopyWithImpl<$Res, PokemonTypes>;
   @useResult
-  $Res call({List<String>? types});
+  $Res call({List<PokemonType>? types});
 }
 
 /// @nodoc
@@ -56,7 +56,7 @@ class _$PokemonTypesCopyWithImpl<$Res, $Val extends PokemonTypes>
       types: freezed == types
           ? _value.types
           : types // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<PokemonType>?,
     ) as $Val);
   }
 }
@@ -69,7 +69,7 @@ abstract class _$$_PokemonTypesCopyWith<$Res>
       __$$_PokemonTypesCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<String>? types});
+  $Res call({List<PokemonType>? types});
 }
 
 /// @nodoc
@@ -89,7 +89,7 @@ class __$$_PokemonTypesCopyWithImpl<$Res>
       types: freezed == types
           ? _value._types
           : types // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<PokemonType>?,
     ));
   }
 }
@@ -97,14 +97,14 @@ class __$$_PokemonTypesCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_PokemonTypes implements _PokemonTypes {
-  const _$_PokemonTypes({final List<String>? types}) : _types = types;
+  const _$_PokemonTypes({final List<PokemonType>? types}) : _types = types;
 
-  factory _$_PokemonTypes.fromJson(Map<String, dynamic> json) =>
+  factory _$_PokemonTypes.fromJson(List<dynamic> json) =>
       _$$_PokemonTypesFromJson(json);
 
-  final List<String>? _types;
+  final List<PokemonType>? _types;
   @override
-  List<String>? get types {
+  List<PokemonType>? get types {
     final value = _types;
     if (value == null) return null;
     if (_types is EqualUnmodifiableListView) return _types;
@@ -145,13 +145,13 @@ class _$_PokemonTypes implements _PokemonTypes {
 }
 
 abstract class _PokemonTypes implements PokemonTypes {
-  const factory _PokemonTypes({final List<String>? types}) = _$_PokemonTypes;
+  const factory _PokemonTypes({final List<PokemonType>? types}) =
+      _$_PokemonTypes;
 
-  factory _PokemonTypes.fromJson(Map<String, dynamic> json) =
-      _$_PokemonTypes.fromJson;
+  factory _PokemonTypes.fromJson(List<dynamic> json) = _$_PokemonTypes.fromJson;
 
   @override
-  List<String>? get types;
+  List<PokemonType>? get types;
   @override
   @JsonKey(ignore: true)
   _$$_PokemonTypesCopyWith<_$_PokemonTypes> get copyWith =>

@@ -27,37 +27,57 @@ class PokemonCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: 40,
-                width: 40,
-                child: CachedNetworkImage(
-                  placeholder: (context, url) {
-                    return const Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
-                      child: CircularProgressIndicator(
-                        strokeWidth: 1,
-                      ),
-                    );
-                  },
-                  imageBuilder: (context, imageProvider) => Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: imageProvider,
-                        fit: BoxFit.cover,
+                height: 60,
+                width: 60,
+                child: Expanded(
+                  child: CachedNetworkImage(
+                    placeholder: (context, url) {
+                      return const Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 20),
+                        child: CircularProgressIndicator(
+                          strokeWidth: 1,
+                        ),
+                      );
+                    },
+                    imageBuilder: (context, imageProvider) => Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
+                    imageUrl: pokemon
+                            ?.sprites?.image?.pokemonImageHome?.frontDefault ??
+                        '',
                   ),
-                  imageUrl:
-                      pokemon?.sprites?.image?.pokemonImageHome?.frontDefault ??
-                          '',
                 ),
               ),
               const SizedBox(
                 width: 10,
               ),
-              Text(
-                pokemon?.name?.capitalize() ?? 'N/A',
-                style: const TextStyle(fontSize: 16),
+              Column(
+                children: [
+                  Text(
+                    pokemon?.name?.capitalize() ?? 'N/A',
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  SizedBox(
+                    height: 20,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: pokemon?.types?.types?.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Text(
+                          pokemon?.types?.types?[index].type?.name ?? 'N/A',
+                          style: const TextStyle(fontSize: 16),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
               const Spacer(),
               const Icon(Icons.arrow_forward_ios_rounded)

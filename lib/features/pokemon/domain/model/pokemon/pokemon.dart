@@ -1,3 +1,4 @@
+import 'package:aib_test/features/pokemon/domain/model/pokemon_types/pokemon_types.dart';
 import 'package:aib_test/features/pokemon/domain/model/sprites/sprites.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'pokemon.freezed.dart';
@@ -13,7 +14,7 @@ class Pokemon with _$Pokemon {
     @JsonKey(name: 'is_default') bool? isDefault,
     int? order,
     int? weight,
-    // PokemonTypes? types,
+    PokemonTypes? types,
     Sprites? sprites,
     String? url,
   }) = _Pokemon;
