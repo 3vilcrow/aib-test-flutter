@@ -1,3 +1,4 @@
+import 'package:aib_test/features/pokemon/presentation/pokemon_list/widgets/pokemon_type_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:aib_test/core/routing/app_router.dart';
@@ -34,7 +35,9 @@ class PokemonCard extends StatelessWidget {
                     placeholder: (context, url) {
                       return const Padding(
                         padding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 20),
+                          vertical: 10.0,
+                          horizontal: 20,
+                        ),
                         child: CircularProgressIndicator(
                           strokeWidth: 1,
                         ),
@@ -58,21 +61,22 @@ class PokemonCard extends StatelessWidget {
                 width: 10,
               ),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     pokemon?.name?.capitalize() ?? 'N/A',
                     style: const TextStyle(fontSize: 16),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 25,
                     child: ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       itemCount: pokemon?.types?.types?.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return Text(
-                          pokemon?.types?.types?[index].type?.name ?? 'N/A',
-                          style: const TextStyle(fontSize: 16),
+                        return PokemonTypeWidget(
+                          type:
+                              pokemon?.types?.types?[index].type?.name ?? 'N/A',
                         );
                       },
                     ),
