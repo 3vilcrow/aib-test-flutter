@@ -63,9 +63,23 @@ class PokemonCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    pokemon?.name?.capitalize() ?? 'N/A',
-                    style: const TextStyle(fontSize: 16),
+                  Row(
+                    children: [
+                      Text(
+                        pokemon?.name?.capitalize() ?? 'N/A',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        '#${(pokemon?.id ?? 0).toString().padLeft(4, '0')}',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Color.fromRGBO(203, 203, 203, 1),
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: 25,

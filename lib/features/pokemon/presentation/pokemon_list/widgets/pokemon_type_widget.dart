@@ -13,8 +13,9 @@ class PokemonTypeWidget extends StatelessWidget {
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
-            color: colorForPokemonTypeWidget(type),
-            borderRadius: BorderRadius.circular(10)),
+          color: colorForPokemonTypeWidget(type),
+          borderRadius: BorderRadius.circular(10),
+        ),
         child: Text(
           type.capitalize(),
           style: const TextStyle(fontSize: 14, color: Colors.white),
