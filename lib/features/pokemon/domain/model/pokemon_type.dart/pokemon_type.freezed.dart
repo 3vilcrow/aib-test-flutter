@@ -20,7 +20,7 @@ PokemonType _$PokemonTypeFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PokemonType {
-  PokemonTypeFinal? get type => throw _privateConstructorUsedError;
+  PokemonTypeDescription? get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,9 +34,9 @@ abstract class $PokemonTypeCopyWith<$Res> {
           PokemonType value, $Res Function(PokemonType) then) =
       _$PokemonTypeCopyWithImpl<$Res, PokemonType>;
   @useResult
-  $Res call({PokemonTypeFinal? type});
+  $Res call({PokemonTypeDescription? type});
 
-  $PokemonTypeFinalCopyWith<$Res>? get type;
+  $PokemonTypeDescriptionCopyWith<$Res>? get type;
 }
 
 /// @nodoc
@@ -58,18 +58,18 @@ class _$PokemonTypeCopyWithImpl<$Res, $Val extends PokemonType>
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as PokemonTypeFinal?,
+              as PokemonTypeDescription?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $PokemonTypeFinalCopyWith<$Res>? get type {
+  $PokemonTypeDescriptionCopyWith<$Res>? get type {
     if (_value.type == null) {
       return null;
     }
 
-    return $PokemonTypeFinalCopyWith<$Res>(_value.type!, (value) {
+    return $PokemonTypeDescriptionCopyWith<$Res>(_value.type!, (value) {
       return _then(_value.copyWith(type: value) as $Val);
     });
   }
@@ -83,10 +83,10 @@ abstract class _$$_PokemonTypeCopyWith<$Res>
       __$$_PokemonTypeCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({PokemonTypeFinal? type});
+  $Res call({PokemonTypeDescription? type});
 
   @override
-  $PokemonTypeFinalCopyWith<$Res>? get type;
+  $PokemonTypeDescriptionCopyWith<$Res>? get type;
 }
 
 /// @nodoc
@@ -106,7 +106,7 @@ class __$$_PokemonTypeCopyWithImpl<$Res>
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as PokemonTypeFinal?,
+              as PokemonTypeDescription?,
     ));
   }
 }
@@ -120,7 +120,7 @@ class _$_PokemonType implements _PokemonType {
       _$$_PokemonTypeFromJson(json);
 
   @override
-  final PokemonTypeFinal? type;
+  final PokemonTypeDescription? type;
 
   @override
   String toString() {
@@ -154,13 +154,14 @@ class _$_PokemonType implements _PokemonType {
 }
 
 abstract class _PokemonType implements PokemonType {
-  const factory _PokemonType({final PokemonTypeFinal? type}) = _$_PokemonType;
+  const factory _PokemonType({final PokemonTypeDescription? type}) =
+      _$_PokemonType;
 
   factory _PokemonType.fromJson(Map<String, dynamic> json) =
       _$_PokemonType.fromJson;
 
   @override
-  PokemonTypeFinal? get type;
+  PokemonTypeDescription? get type;
   @override
   @JsonKey(ignore: true)
   _$$_PokemonTypeCopyWith<_$_PokemonType> get copyWith =>

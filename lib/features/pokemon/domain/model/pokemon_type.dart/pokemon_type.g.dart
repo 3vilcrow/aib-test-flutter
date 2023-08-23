@@ -10,7 +10,8 @@ _$_PokemonType _$$_PokemonTypeFromJson(Map<String, dynamic> json) =>
     _$_PokemonType(
       type: json['type'] == null
           ? null
-          : PokemonTypeFinal.fromJson(json['type'] as Map<String, dynamic>),
+          : PokemonTypeDescription.fromJson(
+              json['type'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_PokemonTypeToJson(_$_PokemonType instance) =>

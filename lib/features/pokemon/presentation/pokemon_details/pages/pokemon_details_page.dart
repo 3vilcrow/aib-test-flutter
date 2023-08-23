@@ -100,6 +100,8 @@ class PokemonDetailsContent extends StatelessWidget {
                     color: Color.fromRGBO(203, 203, 203, 1),
                   ),
                 ),
+
+                // Small Images
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
