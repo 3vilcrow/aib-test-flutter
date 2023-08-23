@@ -172,10 +172,11 @@ class PokemonDetailsContent extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
-                      state
-                              .abilitySelected
+                      state.abilitySelected
                               ?.pokemonAbilityDescriptionEffectEntries
-                              ?.first
+                              ?.firstWhere(
+                                (element) => element?.language?.name == 'en',
+                              )
                               ?.effect ??
                           'N/A',
                     ),
