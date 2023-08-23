@@ -1,4 +1,6 @@
+import 'package:aib_test/core/utils/string_extension.dart';
 import 'package:aib_test/features/pokemon/data/dto/get_ability/get_ability.dart';
+import 'package:aib_test/features/pokemon/data/dto/get_pokemon/get_pokemon.dart';
 import 'package:aib_test/features/pokemon/domain/model/pokemon/pokemon.dart';
 import 'package:aib_test/features/pokemon/domain/model/pokemon_ability_description/pokemon_ability_description.dart';
 import 'package:aib_test/features/pokemon/domain/repository/pokemons_repository.dart';
@@ -16,7 +18,7 @@ class PokemonDetailsCubit extends Cubit<PokemonDetailsState> {
         abilitySelected = pokemon?.abilities?.first?.ability,
         super(const PokemonDetailsState());
 
-  final Pokemon? _pokemon;
+  Pokemon? _pokemon;
   final PokemonsRepository _pokemonsRepository;
   PokemonAbilityDescription? abilitySelected;
 
@@ -104,5 +106,38 @@ class PokemonDetailsCubit extends Cubit<PokemonDetailsState> {
         abilitySelected: abilitySelected,
       ),
     );
+  }
+
+  Future<void> nextPokemon() async {
+    if (_pokemon?.url == null) {
+      return emit(
+        state.copyWith(
+          status: Status.error,
+        ),
+      );
+    }
+    GetPokemonRequestDTO pokemonRequest = GetPokemonRequestDTO(
+      url: _pokemon!.url!.incrementFinalIdInUrl(),
+    );
+    final eitherPokemon = await _pokemonsRepository.getPokemon(pokemonRequest);
+
+    if (eitherPokemon.isLeft()) {
+      return emit(state.copyWith(status: Status.error));
+    } else {
+      final newPokemon = eitherPokemon.getOrElse(() => null);
+
+      if (newPokemon == null) {
+        emit(
+          state.copyWith(
+            status: Status.error,
+          ),
+        );
+      } else {
+        _pokemon = newPokemon;
+        emit(
+          state.copyWith(status: Status.success, pokemon: newPokemon),
+        );
+      }
+    }
   }
 }

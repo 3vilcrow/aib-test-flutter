@@ -5,7 +5,6 @@ import 'package:aib_test/features/pokemon/domain/repository/pokemons_repository.
 import 'package:aib_test/features/pokemon/presentation/pokemon_details/pages/arguments/pokemon_details_page_args.dart';
 import 'package:aib_test/features/pokemon/presentation/pokemon_details/widgets/button.dart';
 import 'package:aib_test/features/pokemon/presentation/pokemon_details/widgets/pokemon_list_sprites_widget.dart';
-import 'package:aib_test/features/pokemon/presentation/pokemon_list/cubit/pokemon_list_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -181,26 +180,18 @@ class PokemonDetailsContent extends StatelessWidget {
                           'N/A',
                     ),
                   ),
-                  const Spacer(),
+
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        Button(text: 'Previous', onPressed: () {}),
                         Button(
-                          text: 'Previous',
-                          onPressed: () =>
-                              locator<PokemonListCubit>().previousPokemon(
-                            state.pokemon,
-                          ),
-                        ),
-                        Button(
-                          text: 'Next',
-                          onPressed: () =>
-                              locator<PokemonListCubit>().nextPokemon(
-                            state.pokemon,
-                          ),
-                        ),
+                            text: 'Next',
+                            onPressed: () => context
+                                .read<PokemonDetailsCubit>()
+                                .nextPokemon()),
                       ],
                     ),
                   ),

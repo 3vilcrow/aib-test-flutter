@@ -1,14 +1,11 @@
-import 'package:aib_test/core/routing/app_router.dart';
 import 'package:aib_test/features/pokemon/data/dto/get_pokemon/get_pokemon.dart';
 import 'package:aib_test/features/pokemon/domain/model/pokemon/pokemon.dart';
-import 'package:aib_test/features/pokemon/presentation/pokemon_details/pages/arguments/pokemon_details_page_args.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aib_test/core/utils/constants/app_contants.dart';
 import 'package:aib_test/core/utils/enums/status.dart';
 import 'package:aib_test/features/pokemon/data/dto/get_pokemons_list/get_pokemons_list.dart';
 import 'package:aib_test/features/pokemon/domain/repository/pokemons_repository.dart';
 import 'package:aib_test/features/pokemon/presentation/pokemon_list/cubit/pokemon_list_state.dart';
-import 'package:get/get.dart';
 
 class PokemonListCubit extends Cubit<PokemonListState> {
   PokemonListCubit({
@@ -72,10 +69,17 @@ class PokemonListCubit extends Cubit<PokemonListState> {
                     ),
                   );
                 } else {
-                  final indexPokemonInList = responseListPokemon
-                      .indexWhere((p) => p.name == pokemon.name);
+                  final indexPokemonInList =
+                      responseListPokemon.indexWhere((p) {
+                    if (p.name == pokemon?.name) {
+                      pokemon = pokemon?.copyWith(url: p.url);
+                      return true;
+                    } else {
+                      return false;
+                    }
+                  });
                   responseListPokemon.removeAt(indexPokemonInList);
-                  responseListPokemon.insert(indexPokemonInList, pokemon);
+                  responseListPokemon.insert(indexPokemonInList, pokemon!);
                 }
               });
             }
@@ -137,16 +141,23 @@ class PokemonListCubit extends Cubit<PokemonListState> {
                     ),
                   );
                 } else {
-                  final indexPokemonInList =
-                      listPokemon.indexWhere((p) => p.name == pokemon.name);
+                  final indexPokemonInList = listPokemon.indexWhere((p) {
+                    if (p.name == pokemon?.name) {
+                      pokemon = pokemon?.copyWith(url: p.url);
+                      return true;
+                    } else {
+                      return false;
+                    }
+                  });
+
                   listPokemon.removeAt(indexPokemonInList);
-                  listPokemon.insert(indexPokemonInList, pokemon);
+                  listPokemon.insert(indexPokemonInList, pokemon!);
                 }
               });
             }
           }
 
-          return emit(
+          emit(
             state.copyWith(
               status: Status.success,
               pokemonList: List.of(state.pokemonList)..addAll(listPokemon),
@@ -156,25 +167,5 @@ class PokemonListCubit extends Cubit<PokemonListState> {
         }
       },
     );
-  }
-
-  Future<void> nextPokemon(Pokemon? pokemon) async {
-    if (pokemon != null) {
-      int index = state.pokemonList.indexOf(pokemon);
-      Get.offAllNamed(
-        AppRoute.pokemonDetails.name,
-        arguments: PokemonDetailsPageArgs(pokemon: state.pokemonList[++index]),
-      );
-    }
-  }
-
-  Future<void> previousPokemon(Pokemon? pokemon) async {
-    if (pokemon != null) {
-      int index = state.pokemonList.indexOf(pokemon);
-      Get.offAllNamed(
-        AppRoute.pokemonDetails.name,
-        arguments: PokemonDetailsPageArgs(pokemon: state.pokemonList[--index]),
-      );
-    }
   }
 }
