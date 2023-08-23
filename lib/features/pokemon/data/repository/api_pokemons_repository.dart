@@ -1,3 +1,4 @@
+import 'package:aib_test/features/pokemon/data/dto/get_ability/get_ability.dart';
 import 'package:dartz/dartz.dart';
 import 'package:aib_test/core/http/endpoints.dart';
 import 'package:aib_test/core/http/http_service.dart';
@@ -34,6 +35,24 @@ class ApiPokemonsRepository extends PokemonsRepository {
   @override
   Future<Either<void, Pokemon?>> getPokemon(
     GetPokemonRequestDTO request,
+  ) async {
+    try {
+      final resp = await _httpServer.get(
+        endpoint: Endpoints.baseUrl + Endpoints.ability,
+        arguments: request.toJson(),
+      );
+
+      Pokemon response = Pokemon.fromJson(resp.data);
+
+      return Right(response);
+    } catch (_) {
+      return const Left(null);
+    }
+  }
+
+  @override
+  Future<Either<void, Pokemon?>> getAbility(
+    GetAbilityRequestDTO request,
   ) async {
     try {
       final resp = await _httpServer.get(
