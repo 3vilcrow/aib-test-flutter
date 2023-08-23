@@ -66,145 +66,164 @@ class PokemonDetailsContent extends StatelessWidget {
           case Status.error:
             return const Center(child: Text('Fallo al pedir los pokemons'));
           case Status.success:
-            return Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ListView(
-                children: [
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  // Center Big Image
-                  SizedBox(
-                    height: 150,
-                    width: 150,
-                    child: CachedNetworkImage(
-                      placeholder: (context, url) {
-                        return const Padding(
-                          padding: EdgeInsets.symmetric(),
-                          child: CircularProgressIndicator(
-                            strokeWidth: 1,
+            return Stack(
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: ListView(
+                    children: [
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      // Center Big Image
+                      SizedBox(
+                        height: 150,
+                        width: 150,
+                        child: CachedNetworkImage(
+                          placeholder: (context, url) {
+                            return const Padding(
+                              padding: EdgeInsets.symmetric(),
+                              child: CircularProgressIndicator(
+                                strokeWidth: 1,
+                              ),
+                            );
+                          },
+                          imageBuilder: (context, imageProvider) => Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.contain,
+                              ),
+                            ),
                           ),
-                        );
-                      },
-                      imageBuilder: (context, imageProvider) => Container(
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: imageProvider,
-                            fit: BoxFit.contain,
-                          ),
+                          imageUrl: state.pokemon?.sprites?.frontShiny ?? '',
                         ),
                       ),
-                      imageUrl: state.pokemon?.sprites?.frontShiny ?? '',
-                    ),
-                  ),
 
-                  Text(
-                    state.pokemon?.name?.capitalize ?? 'N/A',
-                    style: const TextStyle(
-                      fontSize: 32,
-                      height: 1,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  Text(
-                    '#${(state.pokemon?.id ?? 0).toString().padLeft(4, '0')}',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Color.fromRGBO(203, 203, 203, 1),
-                    ),
-                  ),
-
-                  // Sprites Images in Row
-                  PokemonListSpritesWidget(sprites: state.pokemon?.sprites),
-
-                  SizedBox(
-                    height: 35,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: state.pokemon?.abilities?.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        if (state.abilitySelected?.name ==
-                            state.pokemon?.abilities?[index]?.ability?.name) {
-                          return Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 15.0),
-                            child: Text(
-                              state.pokemon?.abilities?[index]?.ability?.name
-                                      ?.capitalize ??
-                                  'N/A',
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w700,
-                                decoration: TextDecoration.underline,
-                              ),
+                      Column(
+                        children: [
+                          Text(
+                            state.pokemon?.name?.capitalize ?? 'N/A',
+                            style: const TextStyle(
+                              fontSize: 32,
+                              height: 1,
+                              fontWeight: FontWeight.w400,
                             ),
-                          );
-                        } else {
-                          return GestureDetector(
-                            onTap: () => context
+                          ),
+                          Text(
+                            '#${(state.pokemon?.id ?? 0).toString().padLeft(4, '0')}',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Color.fromRGBO(203, 203, 203, 1),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      // Sprites Images in Row
+                      PokemonListSpritesWidget(sprites: state.pokemon?.sprites),
+
+                      SizedBox(
+                        height: 35,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: state.pokemon?.abilities?.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            if (state.abilitySelected?.name ==
+                                state.pokemon?.abilities?[index]?.ability
+                                    ?.name) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 15.0,
+                                ),
+                                child: Text(
+                                  state.pokemon?.abilities?[index]?.ability
+                                          ?.name?.capitalize ??
+                                      'N/A',
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                              );
+                            } else {
+                              return GestureDetector(
+                                onTap: () => context
+                                    .read<PokemonDetailsCubit>()
+                                    .changeSelectedAbility(
+                                      state.pokemon?.abilities?[index]?.ability,
+                                    ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 15.0,
+                                  ),
+                                  child: Text(
+                                    state.pokemon?.abilities?[index]?.ability
+                                            ?.name?.capitalize ??
+                                        'N/A',
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          state.abilitySelected
+                                  ?.pokemonAbilityDescriptionEffectEntries
+                                  ?.firstWhere(
+                                    (element) =>
+                                        element?.language?.name == 'en',
+                                  )
+                                  ?.effect ??
+                              'N/A',
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 80,
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0,
+                        vertical: 10,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Button(
+                            text: 'Previous',
+                            onPressed: () => context
                                 .read<PokemonDetailsCubit>()
-                                .changeSelectedAbility(
-                                  state.pokemon?.abilities?[index]?.ability,
-                                ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 15.0,
-                              ),
-                              child: Text(
-                                state.pokemon?.abilities?[index]?.ability?.name
-                                        ?.capitalize ??
-                                    'N/A',
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ),
-                          );
-                        }
-                      },
+                                .previousPokemon(),
+                          ),
+                          Button(
+                            text: 'Next',
+                            onPressed: () => context
+                                .read<PokemonDetailsCubit>()
+                                .nextPokemon(),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(
-                      state.abilitySelected
-                              ?.pokemonAbilityDescriptionEffectEntries
-                              ?.firstWhere(
-                                (element) => element?.language?.name == 'en',
-                              )
-                              ?.effect ??
-                          'N/A',
-                    ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Button(
-                          text: 'Previous',
-                          onPressed: () => context
-                              .read<PokemonDetailsCubit>()
-                              .previousPokemon(),
-                        ),
-                        Button(
-                          text: 'Next',
-                          onPressed: () =>
-                              context.read<PokemonDetailsCubit>().nextPokemon(),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  )
-                ],
-              ),
+                  ],
+                ),
+              ],
             );
         }
       },
