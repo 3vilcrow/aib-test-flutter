@@ -122,7 +122,7 @@ class PokemonDetailsCubit extends Cubit<PokemonDetailsState> {
     final eitherPokemon = await _pokemonsRepository.getPokemon(pokemonRequest);
 
     if (eitherPokemon.isLeft()) {
-      return emit(state.copyWith(status: Status.error));
+      return;
     } else {
       final newPokemon = eitherPokemon.getOrElse(() => null);
 
@@ -151,7 +151,7 @@ class PokemonDetailsCubit extends Cubit<PokemonDetailsState> {
             await _pokemonsRepository.getAbility(abilityRequest);
 
         if (eitherAbility.isLeft()) {
-          return emit(state.copyWith(status: Status.error));
+          return;
         } else {
           PokemonAbilityDescription? newAbility =
               eitherAbility.getOrElse(() => null);
@@ -193,7 +193,7 @@ class PokemonDetailsCubit extends Cubit<PokemonDetailsState> {
     final eitherPokemon = await _pokemonsRepository.getPokemon(pokemonRequest);
 
     if (eitherPokemon.isLeft()) {
-      return emit(state.copyWith(status: Status.error));
+      return;
     } else {
       final newPokemon = eitherPokemon.getOrElse(() => null);
 
@@ -222,7 +222,7 @@ class PokemonDetailsCubit extends Cubit<PokemonDetailsState> {
             await _pokemonsRepository.getAbility(abilityRequest);
 
         if (eitherAbility.isLeft()) {
-          return emit(state.copyWith(status: Status.error));
+          return;
         } else {
           PokemonAbilityDescription? newAbility =
               eitherAbility.getOrElse(() => null);
