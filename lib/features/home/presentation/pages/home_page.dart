@@ -29,6 +29,14 @@ class HomeContent extends StatefulWidget {
 
 class _HomeContentState extends State<HomeContent>
     with TickerProviderStateMixin {
+  late final TabController _tabController;
+
+  @override
+  void initState() {
+    _tabController = TabController(length: 10, vsync: this);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +61,7 @@ class _HomeContentState extends State<HomeContent>
             Container(
               color: Get.theme.colorScheme.primary,
               child: TabBar(
-                controller: TabController(length: 10, vsync: this),
+                controller: _tabController,
                 physics: const BouncingScrollPhysics(),
                 onTap: (value) {},
                 isScrollable: true,
@@ -81,7 +89,7 @@ class _HomeContentState extends State<HomeContent>
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
-                        'Generation 1',
+                        'Gen. l',
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           color: Colors.black,
@@ -93,7 +101,7 @@ class _HomeContentState extends State<HomeContent>
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
-                        'Generation 2',
+                        'Gen. ll',
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           color: Colors.black,
@@ -105,7 +113,7 @@ class _HomeContentState extends State<HomeContent>
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
-                        'Generation 3',
+                        'Gen. lll',
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           color: Colors.black,
@@ -117,7 +125,7 @@ class _HomeContentState extends State<HomeContent>
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
-                        'Generation 4',
+                        'Gen. lV',
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           color: Colors.black,
@@ -129,7 +137,7 @@ class _HomeContentState extends State<HomeContent>
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
-                        'Generation 5',
+                        'Gen. V',
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           color: Colors.black,
@@ -141,7 +149,7 @@ class _HomeContentState extends State<HomeContent>
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
-                        'Generation 6',
+                        'Gen. Vl',
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           color: Colors.black,
@@ -153,7 +161,7 @@ class _HomeContentState extends State<HomeContent>
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
-                        'Generation 7',
+                        'Gen. Vll',
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           color: Colors.black,
@@ -165,7 +173,7 @@ class _HomeContentState extends State<HomeContent>
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
-                        'Generation 8',
+                        'Gen. Vlll',
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           color: Colors.black,
@@ -177,7 +185,7 @@ class _HomeContentState extends State<HomeContent>
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
-                        'Generation 9',
+                        'Gen. lX',
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           color: Colors.black,
