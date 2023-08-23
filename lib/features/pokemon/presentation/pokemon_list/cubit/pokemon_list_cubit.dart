@@ -167,4 +167,14 @@ class PokemonListCubit extends Cubit<PokemonListState> {
       );
     }
   }
+
+  Future<void> previousPokemon(Pokemon? pokemon) async {
+    if (pokemon != null) {
+      int index = state.pokemonList.indexOf(pokemon);
+      Get.offAllNamed(
+        AppRoute.pokemonDetails.name,
+        arguments: PokemonDetailsPageArgs(pokemon: state.pokemonList[--index]),
+      );
+    }
+  }
 }

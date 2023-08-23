@@ -187,7 +187,13 @@ class PokemonDetailsContent extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Button(text: 'Previous', onPressed: () {}),
+                        Button(
+                          text: 'Previous',
+                          onPressed: () =>
+                              locator<PokemonListCubit>().previousPokemon(
+                            state.pokemon,
+                          ),
+                        ),
                         Button(
                           text: 'Next',
                           onPressed: () =>
