@@ -50,9 +50,15 @@ class _PokemonListContentState extends State<PokemonListContent> {
           case Status.loading:
           case Status.success:
             if (state.pokemonList.isEmpty) {
-              return const Center(child: Text('No hay pokemons'));
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.purple,
+                  strokeWidth: 1.5,
+                ),
+              );
             }
             return ListView.builder(
+              shrinkWrap: true,
               itemBuilder: (BuildContext context, int index) {
                 return index >= state.pokemonList.length
                     ? const BottomLoader()
@@ -65,7 +71,12 @@ class _PokemonListContentState extends State<PokemonListContent> {
             );
           case Status.initial:
           case Status.loaded:
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Colors.purple,
+                strokeWidth: 1.5,
+              ),
+            );
         }
       },
     );
