@@ -12,8 +12,8 @@ class PokemonListSpritesWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         SizedBox(
-          height: 80,
-          width: 80,
+          height: 60,
+          width: 60,
           child: CachedNetworkImage(
             placeholder: (context, url) {
               return const Padding(
@@ -29,7 +29,7 @@ class PokemonListSpritesWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: imageProvider,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.contain,
                 ),
               ),
             ),
@@ -37,8 +37,8 @@ class PokemonListSpritesWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 80,
-          width: 80,
+          height: 60,
+          width: 60,
           child: CachedNetworkImage(
             placeholder: (context, url) {
               return const Padding(
@@ -54,7 +54,7 @@ class PokemonListSpritesWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: imageProvider,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.contain,
                 ),
               ),
             ),
@@ -62,8 +62,8 @@ class PokemonListSpritesWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 80,
-          width: 80,
+          height: 60,
+          width: 60,
           child: CachedNetworkImage(
             placeholder: (context, url) {
               return const Padding(
@@ -79,7 +79,7 @@ class PokemonListSpritesWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: imageProvider,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.contain,
                 ),
               ),
             ),
@@ -87,8 +87,8 @@ class PokemonListSpritesWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 80,
-          width: 80,
+          height: 60,
+          width: 60,
           child: CachedNetworkImage(
             placeholder: (context, url) {
               return const Padding(

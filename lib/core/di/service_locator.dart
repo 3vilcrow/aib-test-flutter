@@ -1,6 +1,7 @@
 import 'package:aib_test/core/http/http_service.dart';
 import 'package:aib_test/features/pokemon/data/repository/api_pokemons_repository.dart';
 import 'package:aib_test/features/pokemon/domain/repository/pokemons_repository.dart';
+import 'package:aib_test/features/pokemon/presentation/pokemon_list/cubit/pokemon_list_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 final locator = GetIt.instance;
@@ -26,4 +27,8 @@ void _registerRepository() {
   );
 }
 
-void _registerCubits() {}
+void _registerCubits() {
+  locator.registerLazySingleton<PokemonListCubit>(
+    () => PokemonListCubit(pokemonsRepository: locator<PokemonsRepository>()),
+  );
+}

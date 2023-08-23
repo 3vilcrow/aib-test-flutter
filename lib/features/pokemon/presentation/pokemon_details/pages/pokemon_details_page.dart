@@ -4,6 +4,7 @@ import 'package:aib_test/features/pokemon/domain/repository/pokemons_repository.
 import 'package:aib_test/features/pokemon/presentation/pokemon_details/pages/arguments/pokemon_details_page_args.dart';
 import 'package:aib_test/features/pokemon/presentation/pokemon_details/widgets/button.dart';
 import 'package:aib_test/features/pokemon/presentation/pokemon_details/widgets/pokemon_list_sprites_widget.dart';
+import 'package:aib_test/features/pokemon/presentation/pokemon_list/cubit/pokemon_list_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,15 +67,15 @@ class PokemonDetailsContent extends StatelessWidget {
             return Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
+              child: ListView(
                 children: [
                   const SizedBox(
                     height: 40,
                   ),
                   // Center Big Image
                   SizedBox(
-                    height: 200,
-                    width: 200,
+                    height: 150,
+                    width: 150,
                     child: CachedNetworkImage(
                       placeholder: (context, url) {
                         return const Padding(
@@ -88,7 +89,7 @@ class PokemonDetailsContent extends StatelessWidget {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: imageProvider,
-                            fit: BoxFit.fill,
+                            fit: BoxFit.contain,
                           ),
                         ),
                       ),
@@ -184,7 +185,13 @@ class PokemonDetailsContent extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Button(text: 'Previous', onPressed: () {}),
-                        Button(text: 'Next', onPressed: () {}),
+                        Button(
+                          text: 'Next',
+                          onPressed: () =>
+                              locator<PokemonListCubit>().nextPokemon(
+                            state.pokemon,
+                          ),
+                        ),
                       ],
                     ),
                   ),

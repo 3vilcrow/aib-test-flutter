@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aib_test/core/di/service_locator.dart';
 import 'package:aib_test/core/utils/enums/status.dart';
-import 'package:aib_test/features/pokemon/domain/repository/pokemons_repository.dart';
+
 import 'package:aib_test/features/pokemon/presentation/pokemon_list/cubit/pokemon_list_cubit.dart';
 import 'package:aib_test/features/pokemon/presentation/pokemon_list/cubit/pokemon_list_state.dart';
 import 'package:aib_test/features/pokemon/presentation/pokemon_list/widgets/bottom_loader.dart';
@@ -16,9 +16,7 @@ class PokemonList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          PokemonListCubit(pokemonsRepository: locator<PokemonsRepository>())
-            ..fetchPokemons(),
+      create: (context) => locator<PokemonListCubit>()..fetchPokemons(),
       child: const PokemonListContent(),
     );
   }
