@@ -1,3 +1,4 @@
+import 'package:aib_test/features/pokemon/domain/model/pokemon_abilities/pokemon_abilities.dart';
 import 'package:aib_test/features/pokemon/domain/model/pokemon_type.dart/pokemon_type.dart';
 import 'package:aib_test/features/pokemon/domain/model/sprites/sprites.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -15,6 +16,7 @@ class Pokemon with _$Pokemon {
     int? order,
     int? weight,
     List<PokemonType?>? types,
+    List<PokemonAbilities?>? abilities,
     Sprites? sprites,
     String? url,
   }) = _Pokemon;

@@ -30,6 +30,7 @@ mixin _$Pokemon {
   int? get order => throw _privateConstructorUsedError;
   int? get weight => throw _privateConstructorUsedError;
   List<PokemonType?>? get types => throw _privateConstructorUsedError;
+  List<PokemonAbilities?>? get abilities => throw _privateConstructorUsedError;
   Sprites? get sprites => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
 
@@ -52,6 +53,7 @@ abstract class $PokemonCopyWith<$Res> {
       int? order,
       int? weight,
       List<PokemonType?>? types,
+      List<PokemonAbilities?>? abilities,
       Sprites? sprites,
       String? url});
 
@@ -79,6 +81,7 @@ class _$PokemonCopyWithImpl<$Res, $Val extends Pokemon>
     Object? order = freezed,
     Object? weight = freezed,
     Object? types = freezed,
+    Object? abilities = freezed,
     Object? sprites = freezed,
     Object? url = freezed,
   }) {
@@ -115,6 +118,10 @@ class _$PokemonCopyWithImpl<$Res, $Val extends Pokemon>
           ? _value.types
           : types // ignore: cast_nullable_to_non_nullable
               as List<PokemonType?>?,
+      abilities: freezed == abilities
+          ? _value.abilities
+          : abilities // ignore: cast_nullable_to_non_nullable
+              as List<PokemonAbilities?>?,
       sprites: freezed == sprites
           ? _value.sprites
           : sprites // ignore: cast_nullable_to_non_nullable
@@ -155,6 +162,7 @@ abstract class _$$_PokemonCopyWith<$Res> implements $PokemonCopyWith<$Res> {
       int? order,
       int? weight,
       List<PokemonType?>? types,
+      List<PokemonAbilities?>? abilities,
       Sprites? sprites,
       String? url});
 
@@ -180,6 +188,7 @@ class __$$_PokemonCopyWithImpl<$Res>
     Object? order = freezed,
     Object? weight = freezed,
     Object? types = freezed,
+    Object? abilities = freezed,
     Object? sprites = freezed,
     Object? url = freezed,
   }) {
@@ -216,6 +225,10 @@ class __$$_PokemonCopyWithImpl<$Res>
           ? _value._types
           : types // ignore: cast_nullable_to_non_nullable
               as List<PokemonType?>?,
+      abilities: freezed == abilities
+          ? _value._abilities
+          : abilities // ignore: cast_nullable_to_non_nullable
+              as List<PokemonAbilities?>?,
       sprites: freezed == sprites
           ? _value.sprites
           : sprites // ignore: cast_nullable_to_non_nullable
@@ -240,9 +253,11 @@ class _$_Pokemon implements _Pokemon {
       this.order,
       this.weight,
       final List<PokemonType?>? types,
+      final List<PokemonAbilities?>? abilities,
       this.sprites,
       this.url})
-      : _types = types;
+      : _types = types,
+        _abilities = abilities;
 
   factory _$_Pokemon.fromJson(Map<String, dynamic> json) =>
       _$$_PokemonFromJson(json);
@@ -273,6 +288,16 @@ class _$_Pokemon implements _Pokemon {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<PokemonAbilities?>? _abilities;
+  @override
+  List<PokemonAbilities?>? get abilities {
+    final value = _abilities;
+    if (value == null) return null;
+    if (_abilities is EqualUnmodifiableListView) return _abilities;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final Sprites? sprites;
   @override
@@ -280,7 +305,7 @@ class _$_Pokemon implements _Pokemon {
 
   @override
   String toString() {
-    return 'Pokemon(id: $id, name: $name, baseExperience: $baseExperience, height: $height, isDefault: $isDefault, order: $order, weight: $weight, types: $types, sprites: $sprites, url: $url)';
+    return 'Pokemon(id: $id, name: $name, baseExperience: $baseExperience, height: $height, isDefault: $isDefault, order: $order, weight: $weight, types: $types, abilities: $abilities, sprites: $sprites, url: $url)';
   }
 
   @override
@@ -298,6 +323,8 @@ class _$_Pokemon implements _Pokemon {
             (identical(other.order, order) || other.order == order) &&
             (identical(other.weight, weight) || other.weight == weight) &&
             const DeepCollectionEquality().equals(other._types, _types) &&
+            const DeepCollectionEquality()
+                .equals(other._abilities, _abilities) &&
             (identical(other.sprites, sprites) || other.sprites == sprites) &&
             (identical(other.url, url) || other.url == url));
   }
@@ -314,6 +341,7 @@ class _$_Pokemon implements _Pokemon {
       order,
       weight,
       const DeepCollectionEquality().hash(_types),
+      const DeepCollectionEquality().hash(_abilities),
       sprites,
       url);
 
@@ -341,6 +369,7 @@ abstract class _Pokemon implements Pokemon {
       final int? order,
       final int? weight,
       final List<PokemonType?>? types,
+      final List<PokemonAbilities?>? abilities,
       final Sprites? sprites,
       final String? url}) = _$_Pokemon;
 
@@ -364,6 +393,8 @@ abstract class _Pokemon implements Pokemon {
   int? get weight;
   @override
   List<PokemonType?>? get types;
+  @override
+  List<PokemonAbilities?>? get abilities;
   @override
   Sprites? get sprites;
   @override

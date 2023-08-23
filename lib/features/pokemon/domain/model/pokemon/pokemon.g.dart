@@ -19,6 +19,11 @@ _$_Pokemon _$$_PokemonFromJson(Map<String, dynamic> json) => _$_Pokemon(
               ? null
               : PokemonType.fromJson(e as Map<String, dynamic>))
           .toList(),
+      abilities: (json['abilities'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : PokemonAbilities.fromJson(e as Map<String, dynamic>))
+          .toList(),
       sprites: json['sprites'] == null
           ? null
           : Sprites.fromJson(json['sprites'] as Map<String, dynamic>),
@@ -35,6 +40,7 @@ Map<String, dynamic> _$$_PokemonToJson(_$_Pokemon instance) =>
       'order': instance.order,
       'weight': instance.weight,
       'types': instance.types?.map((e) => e?.toJson()).toList(),
+      'abilities': instance.abilities?.map((e) => e?.toJson()).toList(),
       'sprites': instance.sprites?.toJson(),
       'url': instance.url,
     };
