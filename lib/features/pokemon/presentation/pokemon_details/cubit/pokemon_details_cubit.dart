@@ -166,15 +166,86 @@ class PokemonDetailsCubit extends Cubit<PokemonDetailsState> {
             newAbility = newAbility.copyWith(
               url: _pokemon!.abilities!.first!.ability!.url!,
             );
+            return emit(
+              state.copyWith(
+                status: Status.success,
+                pokemon: newPokemon,
+                abilitySelected: newAbility,
+              ),
+            );
           }
         }
+      }
+    }
+  }
+
+  Future<void> previousPokemon() async {
+    if (_pokemon?.url == null) {
+      return emit(
+        state.copyWith(
+          status: Status.error,
+        ),
+      );
+    }
+    GetPokemonRequestDTO pokemonRequest = GetPokemonRequestDTO(
+      url: _pokemon!.url!.decrementFinalIdInUrl(),
+    );
+    final eitherPokemon = await _pokemonsRepository.getPokemon(pokemonRequest);
+
+    if (eitherPokemon.isLeft()) {
+      return emit(state.copyWith(status: Status.error));
+    } else {
+      final newPokemon = eitherPokemon.getOrElse(() => null);
+
+      if (newPokemon == null) {
         emit(
           state.copyWith(
-            status: Status.success,
-            pokemon: newPokemon,
-            abilitySelected: abilitySelected,
+            status: Status.error,
           ),
         );
+      } else {
+        _pokemon =
+            newPokemon.copyWith(url: _pokemon!.url!.decrementFinalIdInUrl());
+
+        if (_pokemon?.abilities?.first?.ability?.url == null) {
+          return emit(
+            state.copyWith(
+              status: Status.error,
+            ),
+          );
+        }
+
+        GetAbilityRequestDTO abilityRequest = GetAbilityRequestDTO(
+          url: _pokemon!.abilities!.first!.ability!.url!,
+        );
+        final eitherAbility =
+            await _pokemonsRepository.getAbility(abilityRequest);
+
+        if (eitherAbility.isLeft()) {
+          return emit(state.copyWith(status: Status.error));
+        } else {
+          PokemonAbilityDescription? newAbility =
+              eitherAbility.getOrElse(() => null);
+
+          if (newAbility == null) {
+            emit(
+              state.copyWith(
+                status: Status.error,
+              ),
+            );
+          } else {
+            newAbility = newAbility.copyWith(
+              url: _pokemon!.abilities!.first!.ability!.url!,
+            );
+            return emit(
+              state.copyWith(
+                status: Status.success,
+                pokemon: newPokemon,
+                abilitySelected: newAbility,
+              ),
+            );
+          }
+        }
       }
     }
   }

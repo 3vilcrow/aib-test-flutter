@@ -4,14 +4,18 @@ extension StringExtension on String {
   }
 
   String incrementFinalIdInUrl() {
-    String id = substring(length - 2, length - 1);
-    int numberId = int.parse(id) + 1;
-    return replaceRange(length - 2, length - 1, numberId.toString());
+    return replaceAllMapped(RegExp(r'(\d+)/$'), (match) {
+      int parsedNumber = int.parse(match.group(1)!);
+      int incrementedNumber = parsedNumber + 1;
+      return '$incrementedNumber/';
+    });
   }
 
   String decrementFinalIdInUrl() {
-    String id = substring(length - 2, length - 1);
-    int numberId = int.parse(id) - 1;
-    return replaceRange(length - 2, length - 1, numberId.toString());
+    return replaceAllMapped(RegExp(r'(\d+)/$'), (match) {
+      int parsedNumber = int.parse(match.group(1)!);
+      int incrementedNumber = parsedNumber - 1;
+      return '$incrementedNumber/';
+    });
   }
 }
