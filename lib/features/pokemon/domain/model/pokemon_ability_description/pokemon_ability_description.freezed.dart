@@ -22,6 +22,10 @@ PokemonAbilityDescription _$PokemonAbilityDescriptionFromJson(
 /// @nodoc
 mixin _$PokemonAbilityDescription {
   String? get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'effect_entries')
+  List<PokemonAbilityEffectEntries?>?
+      get pokemonAbilityDescriptionEffectEntries =>
+          throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +40,12 @@ abstract class $PokemonAbilityDescriptionCopyWith<$Res> {
           $Res Function(PokemonAbilityDescription) then) =
       _$PokemonAbilityDescriptionCopyWithImpl<$Res, PokemonAbilityDescription>;
   @useResult
-  $Res call({String? name, String? url});
+  $Res call(
+      {String? name,
+      @JsonKey(name: 'effect_entries')
+      List<PokemonAbilityEffectEntries?>?
+          pokemonAbilityDescriptionEffectEntries,
+      String? url});
 }
 
 /// @nodoc
@@ -54,6 +63,7 @@ class _$PokemonAbilityDescriptionCopyWithImpl<$Res,
   @override
   $Res call({
     Object? name = freezed,
+    Object? pokemonAbilityDescriptionEffectEntries = freezed,
     Object? url = freezed,
   }) {
     return _then(_value.copyWith(
@@ -61,6 +71,11 @@ class _$PokemonAbilityDescriptionCopyWithImpl<$Res,
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
+      pokemonAbilityDescriptionEffectEntries: freezed ==
+              pokemonAbilityDescriptionEffectEntries
+          ? _value.pokemonAbilityDescriptionEffectEntries
+          : pokemonAbilityDescriptionEffectEntries // ignore: cast_nullable_to_non_nullable
+              as List<PokemonAbilityEffectEntries?>?,
       url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -78,7 +93,12 @@ abstract class _$$_PokemonAbilityDescriptionCopyWith<$Res>
       __$$_PokemonAbilityDescriptionCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? name, String? url});
+  $Res call(
+      {String? name,
+      @JsonKey(name: 'effect_entries')
+      List<PokemonAbilityEffectEntries?>?
+          pokemonAbilityDescriptionEffectEntries,
+      String? url});
 }
 
 /// @nodoc
@@ -95,6 +115,7 @@ class __$$_PokemonAbilityDescriptionCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = freezed,
+    Object? pokemonAbilityDescriptionEffectEntries = freezed,
     Object? url = freezed,
   }) {
     return _then(_$_PokemonAbilityDescription(
@@ -102,6 +123,11 @@ class __$$_PokemonAbilityDescriptionCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
+      pokemonAbilityDescriptionEffectEntries: freezed ==
+              pokemonAbilityDescriptionEffectEntries
+          ? _value._pokemonAbilityDescriptionEffectEntries
+          : pokemonAbilityDescriptionEffectEntries // ignore: cast_nullable_to_non_nullable
+              as List<PokemonAbilityEffectEntries?>?,
       url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -113,19 +139,40 @@ class __$$_PokemonAbilityDescriptionCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_PokemonAbilityDescription implements _PokemonAbilityDescription {
-  const _$_PokemonAbilityDescription({this.name, this.url});
+  const _$_PokemonAbilityDescription(
+      {this.name,
+      @JsonKey(name: 'effect_entries')
+      final List<PokemonAbilityEffectEntries?>?
+          pokemonAbilityDescriptionEffectEntries,
+      this.url})
+      : _pokemonAbilityDescriptionEffectEntries =
+            pokemonAbilityDescriptionEffectEntries;
 
   factory _$_PokemonAbilityDescription.fromJson(Map<String, dynamic> json) =>
       _$$_PokemonAbilityDescriptionFromJson(json);
 
   @override
   final String? name;
+  final List<PokemonAbilityEffectEntries?>?
+      _pokemonAbilityDescriptionEffectEntries;
+  @override
+  @JsonKey(name: 'effect_entries')
+  List<PokemonAbilityEffectEntries?>?
+      get pokemonAbilityDescriptionEffectEntries {
+    final value = _pokemonAbilityDescriptionEffectEntries;
+    if (value == null) return null;
+    if (_pokemonAbilityDescriptionEffectEntries is EqualUnmodifiableListView)
+      return _pokemonAbilityDescriptionEffectEntries;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final String? url;
 
   @override
   String toString() {
-    return 'PokemonAbilityDescription(name: $name, url: $url)';
+    return 'PokemonAbilityDescription(name: $name, pokemonAbilityDescriptionEffectEntries: $pokemonAbilityDescriptionEffectEntries, url: $url)';
   }
 
   @override
@@ -134,12 +181,20 @@ class _$_PokemonAbilityDescription implements _PokemonAbilityDescription {
         (other.runtimeType == runtimeType &&
             other is _$_PokemonAbilityDescription &&
             (identical(other.name, name) || other.name == name) &&
+            const DeepCollectionEquality().equals(
+                other._pokemonAbilityDescriptionEffectEntries,
+                _pokemonAbilityDescriptionEffectEntries) &&
             (identical(other.url, url) || other.url == url));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, url);
+  int get hashCode => Object.hash(
+      runtimeType,
+      name,
+      const DeepCollectionEquality()
+          .hash(_pokemonAbilityDescriptionEffectEntries),
+      url);
 
   @JsonKey(ignore: true)
   @override
@@ -158,13 +213,21 @@ class _$_PokemonAbilityDescription implements _PokemonAbilityDescription {
 
 abstract class _PokemonAbilityDescription implements PokemonAbilityDescription {
   const factory _PokemonAbilityDescription(
-      {final String? name, final String? url}) = _$_PokemonAbilityDescription;
+      {final String? name,
+      @JsonKey(name: 'effect_entries')
+      final List<PokemonAbilityEffectEntries?>?
+          pokemonAbilityDescriptionEffectEntries,
+      final String? url}) = _$_PokemonAbilityDescription;
 
   factory _PokemonAbilityDescription.fromJson(Map<String, dynamic> json) =
       _$_PokemonAbilityDescription.fromJson;
 
   @override
   String? get name;
+  @override
+  @JsonKey(name: 'effect_entries')
+  List<PokemonAbilityEffectEntries?>?
+      get pokemonAbilityDescriptionEffectEntries;
   @override
   String? get url;
   @override

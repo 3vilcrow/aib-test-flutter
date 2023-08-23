@@ -1,4 +1,6 @@
+import 'package:aib_test/core/di/service_locator.dart';
 import 'package:aib_test/core/utils/enums/status.dart';
+import 'package:aib_test/features/pokemon/domain/repository/pokemons_repository.dart';
 import 'package:aib_test/features/pokemon/presentation/pokemon_details/pages/arguments/pokemon_details_page_args.dart';
 import 'package:aib_test/features/pokemon/presentation/pokemon_details/widgets/pokemon_list_sprites_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -34,6 +36,7 @@ class PokemonDetails extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (context) => PokemonDetailsCubit(
+          pokemonsRepository: locator<PokemonsRepository>(),
           pokemon: pokemon,
         )..initiaize(),
         child: const PokemonDetailsContent(),

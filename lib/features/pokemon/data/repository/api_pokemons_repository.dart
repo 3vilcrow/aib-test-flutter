@@ -1,4 +1,5 @@
 import 'package:aib_test/features/pokemon/data/dto/get_ability/get_ability.dart';
+import 'package:aib_test/features/pokemon/domain/model/pokemon_ability_description/pokemon_ability_description.dart';
 import 'package:dartz/dartz.dart';
 import 'package:aib_test/core/http/endpoints.dart';
 import 'package:aib_test/core/http/http_service.dart';
@@ -38,8 +39,7 @@ class ApiPokemonsRepository extends PokemonsRepository {
   ) async {
     try {
       final resp = await _httpServer.get(
-        endpoint: Endpoints.baseUrl + Endpoints.ability,
-        arguments: request.toJson(),
+        endpoint: request.url,
       );
 
       Pokemon response = Pokemon.fromJson(resp.data);
@@ -51,7 +51,7 @@ class ApiPokemonsRepository extends PokemonsRepository {
   }
 
   @override
-  Future<Either<void, Pokemon?>> getAbility(
+  Future<Either<void, PokemonAbilityDescription?>> getAbility(
     GetAbilityRequestDTO request,
   ) async {
     try {
@@ -59,7 +59,8 @@ class ApiPokemonsRepository extends PokemonsRepository {
         endpoint: request.url,
       );
 
-      Pokemon response = Pokemon.fromJson(resp.data);
+      PokemonAbilityDescription response =
+          PokemonAbilityDescription.fromJson(resp.data);
 
       return Right(response);
     } catch (_) {
