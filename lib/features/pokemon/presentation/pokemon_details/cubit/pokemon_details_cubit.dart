@@ -133,9 +133,47 @@ class PokemonDetailsCubit extends Cubit<PokemonDetailsState> {
           ),
         );
       } else {
-        _pokemon = newPokemon;
+        _pokemon =
+            newPokemon.copyWith(url: _pokemon!.url!.incrementFinalIdInUrl());
+
+        if (_pokemon?.abilities?.first?.ability?.url == null) {
+          return emit(
+            state.copyWith(
+              status: Status.error,
+            ),
+          );
+        }
+
+        GetAbilityRequestDTO abilityRequest = GetAbilityRequestDTO(
+          url: _pokemon!.abilities!.first!.ability!.url!,
+        );
+        final eitherAbility =
+            await _pokemonsRepository.getAbility(abilityRequest);
+
+        if (eitherAbility.isLeft()) {
+          return emit(state.copyWith(status: Status.error));
+        } else {
+          PokemonAbilityDescription? newAbility =
+              eitherAbility.getOrElse(() => null);
+
+          if (newAbility == null) {
+            emit(
+              state.copyWith(
+                status: Status.error,
+              ),
+            );
+          } else {
+            newAbility = newAbility.copyWith(
+              url: _pokemon!.abilities!.first!.ability!.url!,
+            );
+          }
+        }
         emit(
-          state.copyWith(status: Status.success, pokemon: newPokemon),
+          state.copyWith(
+            status: Status.success,
+            pokemon: newPokemon,
+            abilitySelected: abilitySelected,
+          ),
         );
       }
     }
