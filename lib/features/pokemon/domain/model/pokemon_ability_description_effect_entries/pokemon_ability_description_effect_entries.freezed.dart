@@ -22,6 +22,7 @@ PokemonAbilityEffectEntries _$PokemonAbilityEffectEntriesFromJson(
 /// @nodoc
 mixin _$PokemonAbilityEffectEntries {
   String? get effect => throw _privateConstructorUsedError;
+  PokemonLanguageAbility? get language => throw _privateConstructorUsedError;
   @JsonKey(name: 'short_effect')
   String? get shortEffect => throw _privateConstructorUsedError;
 
@@ -40,7 +41,11 @@ abstract class $PokemonAbilityEffectEntriesCopyWith<$Res> {
           PokemonAbilityEffectEntries>;
   @useResult
   $Res call(
-      {String? effect, @JsonKey(name: 'short_effect') String? shortEffect});
+      {String? effect,
+      PokemonLanguageAbility? language,
+      @JsonKey(name: 'short_effect') String? shortEffect});
+
+  $PokemonLanguageAbilityCopyWith<$Res>? get language;
 }
 
 /// @nodoc
@@ -58,6 +63,7 @@ class _$PokemonAbilityEffectEntriesCopyWithImpl<$Res,
   @override
   $Res call({
     Object? effect = freezed,
+    Object? language = freezed,
     Object? shortEffect = freezed,
   }) {
     return _then(_value.copyWith(
@@ -65,11 +71,27 @@ class _$PokemonAbilityEffectEntriesCopyWithImpl<$Res,
           ? _value.effect
           : effect // ignore: cast_nullable_to_non_nullable
               as String?,
+      language: freezed == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as PokemonLanguageAbility?,
       shortEffect: freezed == shortEffect
           ? _value.shortEffect
           : shortEffect // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PokemonLanguageAbilityCopyWith<$Res>? get language {
+    if (_value.language == null) {
+      return null;
+    }
+
+    return $PokemonLanguageAbilityCopyWith<$Res>(_value.language!, (value) {
+      return _then(_value.copyWith(language: value) as $Val);
+    });
   }
 }
 
@@ -83,7 +105,12 @@ abstract class _$$_PokemonAbilityEffectEntriesCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? effect, @JsonKey(name: 'short_effect') String? shortEffect});
+      {String? effect,
+      PokemonLanguageAbility? language,
+      @JsonKey(name: 'short_effect') String? shortEffect});
+
+  @override
+  $PokemonLanguageAbilityCopyWith<$Res>? get language;
 }
 
 /// @nodoc
@@ -100,6 +127,7 @@ class __$$_PokemonAbilityEffectEntriesCopyWithImpl<$Res>
   @override
   $Res call({
     Object? effect = freezed,
+    Object? language = freezed,
     Object? shortEffect = freezed,
   }) {
     return _then(_$_PokemonAbilityEffectEntries(
@@ -107,6 +135,10 @@ class __$$_PokemonAbilityEffectEntriesCopyWithImpl<$Res>
           ? _value.effect
           : effect // ignore: cast_nullable_to_non_nullable
               as String?,
+      language: freezed == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as PokemonLanguageAbility?,
       shortEffect: freezed == shortEffect
           ? _value.shortEffect
           : shortEffect // ignore: cast_nullable_to_non_nullable
@@ -119,7 +151,9 @@ class __$$_PokemonAbilityEffectEntriesCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PokemonAbilityEffectEntries implements _PokemonAbilityEffectEntries {
   const _$_PokemonAbilityEffectEntries(
-      {this.effect, @JsonKey(name: 'short_effect') this.shortEffect});
+      {this.effect,
+      this.language,
+      @JsonKey(name: 'short_effect') this.shortEffect});
 
   factory _$_PokemonAbilityEffectEntries.fromJson(Map<String, dynamic> json) =>
       _$$_PokemonAbilityEffectEntriesFromJson(json);
@@ -127,12 +161,14 @@ class _$_PokemonAbilityEffectEntries implements _PokemonAbilityEffectEntries {
   @override
   final String? effect;
   @override
+  final PokemonLanguageAbility? language;
+  @override
   @JsonKey(name: 'short_effect')
   final String? shortEffect;
 
   @override
   String toString() {
-    return 'PokemonAbilityEffectEntries(effect: $effect, shortEffect: $shortEffect)';
+    return 'PokemonAbilityEffectEntries(effect: $effect, language: $language, shortEffect: $shortEffect)';
   }
 
   @override
@@ -141,13 +177,15 @@ class _$_PokemonAbilityEffectEntries implements _PokemonAbilityEffectEntries {
         (other.runtimeType == runtimeType &&
             other is _$_PokemonAbilityEffectEntries &&
             (identical(other.effect, effect) || other.effect == effect) &&
+            (identical(other.language, language) ||
+                other.language == language) &&
             (identical(other.shortEffect, shortEffect) ||
                 other.shortEffect == shortEffect));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, effect, shortEffect);
+  int get hashCode => Object.hash(runtimeType, effect, language, shortEffect);
 
   @JsonKey(ignore: true)
   @override
@@ -168,6 +206,7 @@ abstract class _PokemonAbilityEffectEntries
     implements PokemonAbilityEffectEntries {
   const factory _PokemonAbilityEffectEntries(
           {final String? effect,
+          final PokemonLanguageAbility? language,
           @JsonKey(name: 'short_effect') final String? shortEffect}) =
       _$_PokemonAbilityEffectEntries;
 
@@ -176,6 +215,8 @@ abstract class _PokemonAbilityEffectEntries
 
   @override
   String? get effect;
+  @override
+  PokemonLanguageAbility? get language;
   @override
   @JsonKey(name: 'short_effect')
   String? get shortEffect;

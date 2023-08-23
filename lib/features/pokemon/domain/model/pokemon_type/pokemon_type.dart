@@ -1,4 +1,4 @@
-import 'package:aib_test/features/pokemon/domain/model/pokemon_type_description.dart/pokemon_type_description.dart';
+import 'package:aib_test/features/pokemon/domain/model/pokemon_type_description/pokemon_type_description.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'pokemon_type.freezed.dart';

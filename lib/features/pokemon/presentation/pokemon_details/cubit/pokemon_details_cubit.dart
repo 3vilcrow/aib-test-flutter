@@ -69,7 +69,8 @@ class PokemonDetailsCubit extends Cubit<PokemonDetailsState> {
   }
 
   Future<void> changeSelectedAbility(
-      PokemonAbilityDescription? newAbility) async {
+    PokemonAbilityDescription? newAbility,
+  ) async {
     abilitySelected = newAbility;
     GetAbilityRequestDTO abilityRequest = GetAbilityRequestDTO(
       url: abilitySelected!.url!,
