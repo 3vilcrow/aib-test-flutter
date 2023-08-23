@@ -12,13 +12,12 @@ class PokemonListSpritesWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         SizedBox(
-          height: 40,
+          height: 80,
           width: 80,
           child: CachedNetworkImage(
             placeholder: (context, url) {
               return const Padding(
                 padding: EdgeInsets.symmetric(
-                  vertical: 10.0,
                   horizontal: 20,
                 ),
                 child: CircularProgressIndicator(
@@ -30,7 +29,7 @@ class PokemonListSpritesWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: imageProvider,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
@@ -38,13 +37,12 @@ class PokemonListSpritesWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 40,
+          height: 80,
           width: 80,
           child: CachedNetworkImage(
             placeholder: (context, url) {
               return const Padding(
                 padding: EdgeInsets.symmetric(
-                  vertical: 10.0,
                   horizontal: 20,
                 ),
                 child: CircularProgressIndicator(
@@ -56,7 +54,7 @@ class PokemonListSpritesWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: imageProvider,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
@@ -64,13 +62,12 @@ class PokemonListSpritesWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 40,
+          height: 80,
           width: 80,
           child: CachedNetworkImage(
             placeholder: (context, url) {
               return const Padding(
                 padding: EdgeInsets.symmetric(
-                  vertical: 10.0,
                   horizontal: 20,
                 ),
                 child: CircularProgressIndicator(
@@ -82,7 +79,7 @@ class PokemonListSpritesWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: imageProvider,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
@@ -90,13 +87,12 @@ class PokemonListSpritesWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 40,
+          height: 80,
           width: 80,
           child: CachedNetworkImage(
             placeholder: (context, url) {
               return const Padding(
                 padding: EdgeInsets.symmetric(
-                  vertical: 10.0,
                   horizontal: 20,
                 ),
                 child: CircularProgressIndicator(
@@ -108,7 +104,7 @@ class PokemonListSpritesWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: imageProvider,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),

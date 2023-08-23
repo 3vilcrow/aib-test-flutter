@@ -72,15 +72,12 @@ class PokemonDetailsContent extends StatelessWidget {
                   ),
                   // Center Big Image
                   SizedBox(
-                    height: 120,
-                    width: 250,
+                    height: 200,
+                    width: 200,
                     child: CachedNetworkImage(
                       placeholder: (context, url) {
                         return const Padding(
-                          padding: EdgeInsets.symmetric(
-                            vertical: 10.0,
-                            horizontal: 20,
-                          ),
+                          padding: EdgeInsets.symmetric(),
                           child: CircularProgressIndicator(
                             strokeWidth: 1,
                           ),
@@ -90,7 +87,7 @@ class PokemonDetailsContent extends StatelessWidget {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: imageProvider,
-                            fit: BoxFit.cover,
+                            fit: BoxFit.fill,
                           ),
                         ),
                       ),
