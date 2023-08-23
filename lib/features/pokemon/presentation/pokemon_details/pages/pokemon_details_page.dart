@@ -35,9 +35,7 @@ class PokemonDetails extends StatelessWidget {
       body: BlocProvider(
         create: (context) => PokemonDetailsCubit(
           pokemon: pokemon,
-        )
-          ..initiaize()
-          ..abilitySelected,
+        )..initiaize(),
         child: const PokemonDetailsContent(),
       ),
     );
@@ -121,30 +119,37 @@ class PokemonDetailsContent extends StatelessWidget {
                   SizedBox(
                     height: 35,
                     child: ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: state.pokemon?.abilities?.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          if (state.abilitySelected?.name ==
-                              state.pokemon?.abilities?[index]?.ability?.name) {
-                            return Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15.0),
-                              child: Text(
-                                state.pokemon?.abilities?[index]?.ability?.name
-                                        ?.capitalize ??
-                                    'N/A',
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700,
-                                  decoration: TextDecoration.underline,
-                                ),
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: state.pokemon?.abilities?.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        if (state.abilitySelected?.name ==
+                            state.pokemon?.abilities?[index]?.ability?.name) {
+                          return Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 15.0),
+                            child: Text(
+                              state.pokemon?.abilities?[index]?.ability?.name
+                                      ?.capitalize ??
+                                  'N/A',
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                                decoration: TextDecoration.underline,
                               ),
-                            );
-                          } else {
-                            return Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15.0),
+                            ),
+                          );
+                        } else {
+                          return GestureDetector(
+                            onTap: () => context
+                                .read<PokemonDetailsCubit>()
+                                .changeSelectedAbility(
+                                  state.pokemon?.abilities?[index]?.ability,
+                                ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 15.0,
+                              ),
                               child: Text(
                                 state.pokemon?.abilities?[index]?.ability?.name
                                         ?.capitalize ??
@@ -154,9 +159,11 @@ class PokemonDetailsContent extends StatelessWidget {
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
-                            );
-                          }
-                        }),
+                            ),
+                          );
+                        }
+                      },
+                    ),
                   ),
                 ],
               ),

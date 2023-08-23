@@ -13,7 +13,7 @@ class PokemonDetailsCubit extends Cubit<PokemonDetailsState> {
         super(const PokemonDetailsState());
 
   final Pokemon? _pokemon;
-  final PokemonAbilityDescription? abilitySelected;
+  PokemonAbilityDescription? abilitySelected;
 
   void initiaize() {
     if (_pokemon == null || abilitySelected == null) {
@@ -33,5 +33,16 @@ class PokemonDetailsCubit extends Cubit<PokemonDetailsState> {
         ),
       );
     }
+  }
+
+  void changeSelectedAbility(PokemonAbilityDescription? newAbility) {
+    abilitySelected = newAbility;
+    emit(
+      state.copyWith(
+        status: Status.success,
+        pokemon: _pokemon,
+        abilitySelected: abilitySelected,
+      ),
+    );
   }
 }
