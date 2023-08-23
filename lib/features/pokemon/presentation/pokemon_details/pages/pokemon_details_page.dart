@@ -2,6 +2,7 @@ import 'package:aib_test/core/di/service_locator.dart';
 import 'package:aib_test/core/utils/enums/status.dart';
 import 'package:aib_test/features/pokemon/domain/repository/pokemons_repository.dart';
 import 'package:aib_test/features/pokemon/presentation/pokemon_details/pages/arguments/pokemon_details_page_args.dart';
+import 'package:aib_test/features/pokemon/presentation/pokemon_details/widgets/button.dart';
 import 'package:aib_test/features/pokemon/presentation/pokemon_details/widgets/pokemon_list_sprites_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -113,9 +114,7 @@ class PokemonDetailsContent extends StatelessWidget {
 
                   // Sprites Images in Row
                   PokemonListSpritesWidget(sprites: state.pokemon?.sprites),
-                  const SizedBox(
-                    height: 40,
-                  ),
+
                   SizedBox(
                     height: 35,
                     child: ListView.builder(
@@ -177,6 +176,20 @@ class PokemonDetailsContent extends StatelessWidget {
                               ?.effect ??
                           'N/A',
                     ),
+                  ),
+                  const Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Button(text: 'Previous', onPressed: () {}),
+                        Button(text: 'Next', onPressed: () {}),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
                   )
                 ],
               ),

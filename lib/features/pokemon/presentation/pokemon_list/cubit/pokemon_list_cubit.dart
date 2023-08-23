@@ -6,6 +6,7 @@ import 'package:aib_test/core/utils/enums/status.dart';
 import 'package:aib_test/features/pokemon/data/dto/get_pokemons_list/get_pokemons_list.dart';
 import 'package:aib_test/features/pokemon/domain/repository/pokemons_repository.dart';
 import 'package:aib_test/features/pokemon/presentation/pokemon_list/cubit/pokemon_list_state.dart';
+import 'package:get/get.dart';
 
 class PokemonListCubit extends Cubit<PokemonListState> {
   PokemonListCubit({
