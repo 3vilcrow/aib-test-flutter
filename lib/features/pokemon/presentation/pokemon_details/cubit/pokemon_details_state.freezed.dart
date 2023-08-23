@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$PokemonDetailsState {
   Pokemon? get pokemon => throw _privateConstructorUsedError;
+  PokemonAbilityDescription? get abilitySelected =>
+      throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,9 +32,13 @@ abstract class $PokemonDetailsStateCopyWith<$Res> {
           PokemonDetailsState value, $Res Function(PokemonDetailsState) then) =
       _$PokemonDetailsStateCopyWithImpl<$Res, PokemonDetailsState>;
   @useResult
-  $Res call({Pokemon? pokemon, Status status});
+  $Res call(
+      {Pokemon? pokemon,
+      PokemonAbilityDescription? abilitySelected,
+      Status status});
 
   $PokemonCopyWith<$Res>? get pokemon;
+  $PokemonAbilityDescriptionCopyWith<$Res>? get abilitySelected;
 }
 
 /// @nodoc
@@ -49,6 +55,7 @@ class _$PokemonDetailsStateCopyWithImpl<$Res, $Val extends PokemonDetailsState>
   @override
   $Res call({
     Object? pokemon = freezed,
+    Object? abilitySelected = freezed,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
@@ -56,6 +63,10 @@ class _$PokemonDetailsStateCopyWithImpl<$Res, $Val extends PokemonDetailsState>
           ? _value.pokemon
           : pokemon // ignore: cast_nullable_to_non_nullable
               as Pokemon?,
+      abilitySelected: freezed == abilitySelected
+          ? _value.abilitySelected
+          : abilitySelected // ignore: cast_nullable_to_non_nullable
+              as PokemonAbilityDescription?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -74,6 +85,19 @@ class _$PokemonDetailsStateCopyWithImpl<$Res, $Val extends PokemonDetailsState>
       return _then(_value.copyWith(pokemon: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PokemonAbilityDescriptionCopyWith<$Res>? get abilitySelected {
+    if (_value.abilitySelected == null) {
+      return null;
+    }
+
+    return $PokemonAbilityDescriptionCopyWith<$Res>(_value.abilitySelected!,
+        (value) {
+      return _then(_value.copyWith(abilitySelected: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -84,10 +108,15 @@ abstract class _$$_PokemonDetailsStateCopyWith<$Res>
       __$$_PokemonDetailsStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Pokemon? pokemon, Status status});
+  $Res call(
+      {Pokemon? pokemon,
+      PokemonAbilityDescription? abilitySelected,
+      Status status});
 
   @override
   $PokemonCopyWith<$Res>? get pokemon;
+  @override
+  $PokemonAbilityDescriptionCopyWith<$Res>? get abilitySelected;
 }
 
 /// @nodoc
@@ -102,6 +131,7 @@ class __$$_PokemonDetailsStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? pokemon = freezed,
+    Object? abilitySelected = freezed,
     Object? status = null,
   }) {
     return _then(_$_PokemonDetailsState(
@@ -109,6 +139,10 @@ class __$$_PokemonDetailsStateCopyWithImpl<$Res>
           ? _value.pokemon
           : pokemon // ignore: cast_nullable_to_non_nullable
               as Pokemon?,
+      abilitySelected: freezed == abilitySelected
+          ? _value.abilitySelected
+          : abilitySelected // ignore: cast_nullable_to_non_nullable
+              as PokemonAbilityDescription?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -120,17 +154,20 @@ class __$$_PokemonDetailsStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_PokemonDetailsState implements _PokemonDetailsState {
-  const _$_PokemonDetailsState({this.pokemon, this.status = Status.initial});
+  const _$_PokemonDetailsState(
+      {this.pokemon, this.abilitySelected, this.status = Status.initial});
 
   @override
   final Pokemon? pokemon;
+  @override
+  final PokemonAbilityDescription? abilitySelected;
   @override
   @JsonKey()
   final Status status;
 
   @override
   String toString() {
-    return 'PokemonDetailsState(pokemon: $pokemon, status: $status)';
+    return 'PokemonDetailsState(pokemon: $pokemon, abilitySelected: $abilitySelected, status: $status)';
   }
 
   @override
@@ -139,11 +176,14 @@ class _$_PokemonDetailsState implements _PokemonDetailsState {
         (other.runtimeType == runtimeType &&
             other is _$_PokemonDetailsState &&
             (identical(other.pokemon, pokemon) || other.pokemon == pokemon) &&
+            (identical(other.abilitySelected, abilitySelected) ||
+                other.abilitySelected == abilitySelected) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, pokemon, status);
+  int get hashCode =>
+      Object.hash(runtimeType, pokemon, abilitySelected, status);
 
   @JsonKey(ignore: true)
   @override
@@ -155,10 +195,14 @@ class _$_PokemonDetailsState implements _PokemonDetailsState {
 
 abstract class _PokemonDetailsState implements PokemonDetailsState {
   const factory _PokemonDetailsState(
-      {final Pokemon? pokemon, final Status status}) = _$_PokemonDetailsState;
+      {final Pokemon? pokemon,
+      final PokemonAbilityDescription? abilitySelected,
+      final Status status}) = _$_PokemonDetailsState;
 
   @override
   Pokemon? get pokemon;
+  @override
+  PokemonAbilityDescription? get abilitySelected;
   @override
   Status get status;
   @override

@@ -1,5 +1,6 @@
 import 'package:aib_test/core/utils/enums/status.dart';
 import 'package:aib_test/features/pokemon/presentation/pokemon_details/pages/arguments/pokemon_details_page_args.dart';
+import 'package:aib_test/features/pokemon/presentation/pokemon_details/widgets/pokemon_list_sprites_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,7 +35,9 @@ class PokemonDetails extends StatelessWidget {
       body: BlocProvider(
         create: (context) => PokemonDetailsCubit(
           pokemon: pokemon,
-        )..initiaize(),
+        )
+          ..initiaize()
+          ..abilitySelected,
         child: const PokemonDetailsContent(),
       ),
     );
@@ -50,172 +53,115 @@ class PokemonDetailsContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PokemonDetailsCubit, PokemonDetailsState>(
       builder: (context, state) {
-        if (state.status.isSuccess) {
-          return Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 40,
-                ),
-                SizedBox(
-                  height: 120,
-                  width: 250,
-                  child: CachedNetworkImage(
-                    placeholder: (context, url) {
-                      return const Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 10.0,
-                          horizontal: 20,
-                        ),
-                        child: CircularProgressIndicator(
-                          strokeWidth: 1,
-                        ),
-                      );
-                    },
-                    imageBuilder: (context, imageProvider) => Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
+        switch (state.status) {
+          case Status.initial:
+          case Status.loading:
+            return const Center(child: CircularProgressIndicator());
+          case Status.loaded:
+          case Status.error:
+            return const Center(child: Text('Fallo al pedir los pokemons'));
+          case Status.success:
+            return Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  // Center Big Image
+                  SizedBox(
+                    height: 120,
+                    width: 250,
+                    child: CachedNetworkImage(
+                      placeholder: (context, url) {
+                        return const Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 10.0,
+                            horizontal: 20,
+                          ),
+                          child: CircularProgressIndicator(
+                            strokeWidth: 1,
+                          ),
+                        );
+                      },
+                      imageBuilder: (context, imageProvider) => Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
+                      imageUrl: state.pokemon?.sprites?.frontShiny ?? '',
                     ),
-                    imageUrl: state.pokemon?.sprites?.frontShiny ?? '',
                   ),
-                ),
-                Text(
-                  state.pokemon?.name?.capitalize ?? 'N/A',
-                  style: const TextStyle(
-                    fontSize: 32,
-                    height: 1,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                Text(
-                  '#${(state.pokemon?.id ?? 0).toString().padLeft(4, '0')}',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Color.fromRGBO(203, 203, 203, 1),
-                  ),
-                ),
 
-                // Small Images
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(
-                      height: 40,
-                      width: 80,
-                      child: CachedNetworkImage(
-                        placeholder: (context, url) {
-                          return const Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 10.0,
-                              horizontal: 20,
-                            ),
-                            child: CircularProgressIndicator(
-                              strokeWidth: 1,
-                            ),
-                          );
-                        },
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: imageProvider,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        imageUrl: state.pokemon?.sprites?.frontShiny ?? '',
-                      ),
+                  Text(
+                    state.pokemon?.name?.capitalize ?? 'N/A',
+                    style: const TextStyle(
+                      fontSize: 32,
+                      height: 1,
+                      fontWeight: FontWeight.w400,
                     ),
-                    SizedBox(
-                      height: 40,
-                      width: 80,
-                      child: CachedNetworkImage(
-                        placeholder: (context, url) {
-                          return const Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 10.0,
-                              horizontal: 20,
-                            ),
-                            child: CircularProgressIndicator(
-                              strokeWidth: 1,
-                            ),
-                          );
-                        },
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: imageProvider,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        imageUrl: state.pokemon?.sprites?.frontDefault ?? '',
-                      ),
+                  ),
+                  Text(
+                    '#${(state.pokemon?.id ?? 0).toString().padLeft(4, '0')}',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Color.fromRGBO(203, 203, 203, 1),
                     ),
-                    SizedBox(
-                      height: 40,
-                      width: 80,
-                      child: CachedNetworkImage(
-                        placeholder: (context, url) {
-                          return const Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 10.0,
-                              horizontal: 20,
-                            ),
-                            child: CircularProgressIndicator(
-                              strokeWidth: 1,
-                            ),
-                          );
-                        },
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: imageProvider,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        imageUrl: state.pokemon?.sprites?.backShiny ?? '',
-                      ),
-                    ),
-                    SizedBox(
-                      height: 40,
-                      width: 80,
-                      child: CachedNetworkImage(
-                        placeholder: (context, url) {
-                          return const Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 10.0,
-                              horizontal: 20,
-                            ),
-                            child: CircularProgressIndicator(
-                              strokeWidth: 1,
-                            ),
-                          );
-                        },
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: imageProvider,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        imageUrl: state.pokemon?.sprites?.backDefault ?? '',
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
+                  ),
+
+                  // Sprites Images in Row
+                  PokemonListSpritesWidget(sprites: state.pokemon?.sprites),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  SizedBox(
+                    height: 35,
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: state.pokemon?.abilities?.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          if (state.abilitySelected?.name ==
+                              state.pokemon?.abilities?[index]?.ability?.name) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15.0),
+                              child: Text(
+                                state.pokemon?.abilities?[index]?.ability?.name
+                                        ?.capitalize ??
+                                    'N/A',
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            );
+                          } else {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15.0),
+                              child: Text(
+                                state.pokemon?.abilities?[index]?.ability?.name
+                                        ?.capitalize ??
+                                    'N/A',
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            );
+                          }
+                        }),
+                  ),
+                ],
+              ),
+            );
         }
-        return const Center(child: CircularProgressIndicator());
       },
     );
   }
