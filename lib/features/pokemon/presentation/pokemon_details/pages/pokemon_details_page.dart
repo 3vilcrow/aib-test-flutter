@@ -1,4 +1,5 @@
 import 'package:aib_test/core/di/service_locator.dart';
+import 'package:aib_test/core/routing/app_router.dart';
 import 'package:aib_test/core/utils/enums/status.dart';
 import 'package:aib_test/features/pokemon/domain/repository/pokemons_repository.dart';
 import 'package:aib_test/features/pokemon/presentation/pokemon_details/pages/arguments/pokemon_details_page_args.dart';
@@ -30,7 +31,9 @@ class PokemonDetails extends StatelessWidget {
         title: const Text('Detail'),
         leading: IconButton(
           splashRadius: 20,
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Get.toNamed(
+            AppRoute.home.name,
+          ),
           icon: const Icon(
             Icons.arrow_back_ios_new_rounded,
           ),
