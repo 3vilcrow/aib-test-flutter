@@ -168,6 +168,18 @@ class PokemonDetailsContent extends StatelessWidget {
                       },
                     ),
                   ),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text(
+                      state
+                              .abilitySelected
+                              ?.pokemonAbilityDescriptionEffectEntries
+                              ?.first
+                              ?.effect ??
+                          'N/A',
+                    ),
+                  )
                 ],
               ),
             );

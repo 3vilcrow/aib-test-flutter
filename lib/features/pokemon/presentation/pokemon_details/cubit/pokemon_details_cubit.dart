@@ -51,6 +51,11 @@ class PokemonDetailsCubit extends Cubit<PokemonDetailsState> {
               status: Status.error,
             ),
           );
+        } else {
+          abilitySelected = abilitySelected?.copyWith(
+            pokemonAbilityDescriptionEffectEntries:
+                ability.pokemonAbilityDescriptionEffectEntries,
+          );
         }
       });
       emit(
@@ -63,8 +68,34 @@ class PokemonDetailsCubit extends Cubit<PokemonDetailsState> {
     }
   }
 
-  void changeSelectedAbility(PokemonAbilityDescription? newAbility) {
+  Future<void> changeSelectedAbility(
+      PokemonAbilityDescription? newAbility) async {
     abilitySelected = newAbility;
+    GetAbilityRequestDTO abilityRequest = GetAbilityRequestDTO(
+      url: abilitySelected!.url!,
+    );
+    final eitherPokemon = await _pokemonsRepository.getAbility(abilityRequest);
+
+    eitherPokemon.fold((failureGetAbility) {
+      return emit(
+        state.copyWith(
+          status: Status.error,
+        ),
+      );
+    }, (ability) async {
+      if (ability == null) {
+        emit(
+          state.copyWith(
+            status: Status.error,
+          ),
+        );
+      } else {
+        abilitySelected = abilitySelected?.copyWith(
+          pokemonAbilityDescriptionEffectEntries:
+              ability.pokemonAbilityDescriptionEffectEntries,
+        );
+      }
+    });
     emit(
       state.copyWith(
         status: Status.success,
